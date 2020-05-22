@@ -4,22 +4,22 @@ namespace B20_Ex02
 {
     internal class MainMenu
     {
-        internal GameManager CreateGameManager()
-        {
-            Player firstPlayer = getHumanPlayer();
-            Player secondPlayer = getSecondPlayer();
-            //eGameLevel gameLevel = getGameLevel();
-            Board board = getBoard();
+        //internal GameManager CreateGameManager()
+        //{
+        //    Player firstPlayer = getHumanPlayer();
+        //    Player secondPlayer = getSecondPlayer();
+        //    //eGameLevel gameLevel = getGameLevel();
+        //    Board board = getBoard();
 
-            return new GameManager(firstPlayer, secondPlayer, board);
+        //    return new GameManager(firstPlayer, secondPlayer, board);
 
 
-            //// TESTING - Remove later
-            Console.WriteLine($@"Player #1 is {firstPlayer.PlayerType}");
-            Console.WriteLine($@"Player #2 is {secondPlayer.PlayerType}");
-            Console.WriteLine(board.Height);
-            Console.WriteLine(board.Width);
-        }
+        //    //// TESTING - Remove later
+        //    Console.WriteLine($@"Player #1 is {firstPlayer.PlayerType}");
+        //    Console.WriteLine($@"Player #2 is {secondPlayer.PlayerType}");
+        //    Console.WriteLine(board.Height);
+        //    Console.WriteLine(board.Width);
+        //}
 
         private Player getHumanPlayer()
         {
@@ -78,7 +78,6 @@ namespace B20_Ex02
 
         private Board getBoard()
         {
-            Board board = null;
             const bool v_InvalidBoard = true;
             int boardWidth;
             int boardHeight;
