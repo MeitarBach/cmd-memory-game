@@ -14,6 +14,13 @@ namespace B20_Ex02
 
         internal void PaintBoard()
         {
+            StringBuilder boardPainting = new StringBuilder();
+
+            //// Create a row seperator
+            int seperatorLineLength = (3 * m_Board.Width) + (m_Board.Width + 3); // Length of seperating line
+            string rowSeperator = "  ".PadRight(seperatorLineLength, '=');
+
+            //// Draw first line and append to painting
             StringBuilder firstLine = new StringBuilder(" ");
             char columnLetter = 'A';
             for(int i = 0; i < m_Board.Width; i++)
@@ -21,8 +28,24 @@ namespace B20_Ex02
                 firstLine.Append("   " + columnLetter);
                 columnLetter++;
             }
+            boardPainting.Append(firstLine + Environment.NewLine);
 
-            Console.WriteLine(firstLine);
+            //// Draw all lines based on the board's Game Cells
+            for(int i = 0; i < m_Board.Height; i++)
+            {
+                boardPainting.Append(rowSeperator + Environment.NewLine); // row seperator
+                boardPainting.Append((i+1) + " "); // row number
+                for(int j = 0; j < m_Board.Width; j++)
+                {
+                    boardPainting.Append("|" + m_Board.BoardCells[i,j]);
+                }
+
+                boardPainting.Append("|" + Environment.NewLine);
+            }
+
+            boardPainting.Append(rowSeperator); // closing row seperator
+
+            Console.WriteLine(boardPainting);
         }
     }
 }
