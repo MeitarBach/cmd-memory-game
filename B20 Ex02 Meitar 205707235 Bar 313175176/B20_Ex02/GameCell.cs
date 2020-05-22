@@ -10,7 +10,7 @@ namespace B20_Ex02
         internal GameCell(char i_Letter)
         {
             r_Letter = i_Letter;
-            m_CellIsShow = false;
+            m_CellIsShow = true;
         }
 
         internal char Letter
