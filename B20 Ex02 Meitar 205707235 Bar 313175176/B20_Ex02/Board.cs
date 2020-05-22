@@ -31,10 +31,45 @@
             }
         }
 
+        internal GameCell this[int i_Height, int i_Width]
+        {
+            get
+            {
+                return m_BoardCells(i_Height, i_Width);
+            }
+
+            set
+            {
+                m_BoardCells(i_Height, i_Width) = value;
+            }
+        }
+
+
         private void createRandomizeBoard()
         {
+            bool isEven = false;
+            List<char> listOfChar = new List<Char>();
+
+            for(int i = 0; i < m_Height; i++)
+            {
+                for(int j = 0; j < m_Width; j++)
+                {
+                    if(!isEven)
+                    {
+                        m_BoardCells[i, j].letter = (char)charRandom.Next('a', 'Z');
+                    }
+                    else
+                    {
+                        
+                    }
+
+                }
+            }
             // Random charRandom = new Random(); 
             // m_BoardCells[i, j].letter = (char)charRandom.Next('A', 'Z');
+
+
+            
 
         }
     }
