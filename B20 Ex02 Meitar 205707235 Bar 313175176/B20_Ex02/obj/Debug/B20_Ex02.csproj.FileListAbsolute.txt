@@ -1,0 +1,7 @@
+C:\Users\Meitar\Documents\OneDrive - The Interdisciplinary Center Herzliya IDC\שנה ג\סמסטר ב\C#\Exercises\Ex02\cmd-memory-game\B20 Ex02 Meitar 205707235 Bar 313175176\B20_Ex02\bin\Debug\B20_Ex02.exe.config
+C:\Users\Meitar\Documents\OneDrive - The Interdisciplinary Center Herzliya IDC\שנה ג\סמסטר ב\C#\Exercises\Ex02\cmd-memory-game\B20 Ex02 Meitar 205707235 Bar 313175176\B20_Ex02\bin\Debug\B20_Ex02.exe
+C:\Users\Meitar\Documents\OneDrive - The Interdisciplinary Center Herzliya IDC\שנה ג\סמסטר ב\C#\Exercises\Ex02\cmd-memory-game\B20 Ex02 Meitar 205707235 Bar 313175176\B20_Ex02\bin\Debug\B20_Ex02.pdb
+C:\Users\Meitar\Documents\OneDrive - The Interdisciplinary Center Herzliya IDC\שנה ג\סמסטר ב\C#\Exercises\Ex02\cmd-memory-game\B20 Ex02 Meitar 205707235 Bar 313175176\B20_Ex02\obj\Debug\B20_Ex02.csprojAssemblyReference.cache
+C:\Users\Meitar\Documents\OneDrive - The Interdisciplinary Center Herzliya IDC\שנה ג\סמסטר ב\C#\Exercises\Ex02\cmd-memory-game\B20 Ex02 Meitar 205707235 Bar 313175176\B20_Ex02\obj\Debug\B20_Ex02.csproj.CoreCompileInputs.cache
+C:\Users\Meitar\Documents\OneDrive - The Interdisciplinary Center Herzliya IDC\שנה ג\סמסטר ב\C#\Exercises\Ex02\cmd-memory-game\B20 Ex02 Meitar 205707235 Bar 313175176\B20_Ex02\obj\Debug\B20_Ex02.exe
+C:\Users\Meitar\Documents\OneDrive - The Interdisciplinary Center Herzliya IDC\שנה ג\סמסטר ב\C#\Exercises\Ex02\cmd-memory-game\B20 Ex02 Meitar 205707235 Bar 313175176\B20_Ex02\obj\Debug\B20_Ex02.pdb

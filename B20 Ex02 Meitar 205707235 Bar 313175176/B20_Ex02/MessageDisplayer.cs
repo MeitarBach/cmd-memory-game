@@ -6,9 +6,16 @@ namespace B20_Ex02
     internal class MessageDisplayer
     {
         private const string k_EnterPlayer = "Please Enter Player Name: (no spaces, max 20 chars)";
-        private const string k_ChooseOpponent = "Choose your oponnent:\n1.Human\n2.Computer";
-
-
+        private const string k_ChooseOpponentType = "Choose your oponnent:\n1.Human\n2.Computer";
+        private const string k_NameTooLarge = "Invalid Name: More than 20 chars";
+        private const string k_NameContainsSpaces = "Invalid Name: Contains spaces";
+        private const string k_InvalidOpponent = "Invalid Oponnent: Choose 1/2";
+        private const string k_EnterBoardWidth = "Please enter the board's width: (4-6)";
+        private const string k_EnterBoardHeight = "Please enter the board's height: (4-6)";
+        private const string k_NotANumber = "Invalid input: Not a Number";
+        private const string k_InvalidWidth = "Invalid Width: Not in range 4-6";
+        private const string k_InvalidHeight = "Invalid Height: Not in range 4-6";
+        private const string k_InvalidSize = "Invalid Size: Width X Height is not even";
 
         internal static string EnterPlayer
         {
@@ -18,11 +25,83 @@ namespace B20_Ex02
             }
         }
         
-        internal static string ChooseOpponent
+        internal static string ChooseOpponentType
         {
             get
             {
-                return k_ChooseOpponent;
+                return k_ChooseOpponentType;
+            }
+        }
+        
+        internal static string NameTooLarge
+        {
+            get
+            {
+                return k_NameTooLarge;
+            }
+        }
+        
+        internal static string NameContainsSpaces
+        {
+            get
+            {
+                return k_NameContainsSpaces;
+            }
+        }
+        
+        internal static string InvalidOpponent
+        {
+            get
+            {
+                return k_InvalidOpponent;
+            }
+        }
+
+        internal static string EnterBoardWidth
+        {
+            get
+            {
+                return k_EnterBoardWidth;
+            }
+        }
+
+        internal static string EnterBoardHeight
+        {
+            get
+            {
+                return k_EnterBoardHeight;
+            }
+        }
+
+        internal static string NotANumber
+        {
+            get
+            {
+                return k_NotANumber;
+            }
+        }
+
+        internal static string InvalidWidth
+        {
+            get
+            {
+                return k_InvalidWidth;
+            }
+        }
+
+        internal static string InvalidHeight
+        {
+            get
+            {
+                return k_InvalidHeight;
+            }
+        }
+        
+        internal static string InvalidSize
+        {
+            get
+            {
+                return k_InvalidSize;
             }
         }
 

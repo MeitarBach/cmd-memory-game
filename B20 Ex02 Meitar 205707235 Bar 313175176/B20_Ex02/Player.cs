@@ -10,5 +10,13 @@
             m_PlayerName = i_PlayerName;
             m_playerType = i_PlayerType;
         }
+
+        internal ePlayerType PlayerType
+        {
+            get
+            {
+                return m_playerType;
+            }
+        }
     }
 }
