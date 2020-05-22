@@ -39,8 +39,6 @@
             }
         }
 
-
-<<<<<<< HEAD
         private void createRandomizeBoard()
         {
             bool counterOfChars = 0;
@@ -72,7 +70,6 @@
             numberOfCells = m_Height * m_Width;
             Random random = new Random();
 
-<<<<<<< HEAD
             for(int i = 0; i < numberOfCells - 1; i++)
             {
                 // Pick a random cell between i and the end of the array.
@@ -89,8 +86,5 @@
                 m_BoardCells[j0, j1] = temp;
             }
         }
-=======
-        //}
->>>>>>> 6dc3ed77834a91d1f1eeb4d897a6ca706896136e
     }
 }
