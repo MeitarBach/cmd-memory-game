@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="GameCell.cs" />
     <Compile Include="MainMenu.cs" />
     <Compile Include="MessageDisplayer.cs" />
     <Compile Include="Player.cs" />
