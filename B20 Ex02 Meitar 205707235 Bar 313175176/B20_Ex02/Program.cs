@@ -6,8 +6,13 @@ namespace B20_Ex02
     {
         public static void Main()
         {
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.CreateGameManager();
+            //MainMenu mainMenu = new MainMenu();
+            //mainMenu.CreateGameManager();
+            //Console.ReadLine();
+
+            Board board = new Board(4,3);
+            BoardPainter bp = new BoardPainter(board);
+            bp.PaintBoard();
             Console.ReadLine();
         }
     }
