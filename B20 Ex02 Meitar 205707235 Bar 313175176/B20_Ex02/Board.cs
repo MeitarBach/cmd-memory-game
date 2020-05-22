@@ -1,4 +1,6 @@
-﻿namespace B20_Ex02
+﻿using System;
+
+namespace B20_Ex02
 {
     internal class Board
     {
@@ -35,30 +37,30 @@
         {
             get
             {
-                return m_BoardCells(i_Height, i_Width);
+                return m_BoardCells;
             }
         }
 
         private void createRandomizeBoard()
         {
-            bool counterOfChars = 0;
-            char temporaryChar;
-            List<char> listOfChar = new List<Char>();
+            int counterOfChars = 0;
 
             for(int i = 0; i < m_Height; i++)
             {
                 for(int j = 0; j < m_Width; j++)
                 {
+                    char temporaryChar = (char) ('A' + (counterOfChars / 2));
+
                     if(counterOfChars % 2 == 0)
                     {
-                        temporaryChar = (char) ('A' + counter);
-                        m_BoardCells[i, j].letter = temporaryChar;
-                        counter++;
+                        m_BoardCells[i, j] = new GameCell(temporaryChar);
                     }
                     else
                     {
-                        m_BoardCells[i, j].letter = temporaryChar;
+                        m_BoardCells[i, j] = new GameCell(temporaryChar);
                     }
+
+                    counterOfChars++;
                 }
             }
             
@@ -67,13 +69,12 @@
 
         private void shuffle()
         {
-            numberOfCells = m_Height * m_Width;
+            int numberOfCells = m_Height * m_Width;
             Random random = new Random();
 
             for(int i = 0; i < numberOfCells - 1; i++)
             {
                 // Pick a random cell between i and the end of the array.
-                int j = rand.Next(i, num_cells);
                 int i0 = i / m_Width;
                 int i1 = i % m_Width;
 
