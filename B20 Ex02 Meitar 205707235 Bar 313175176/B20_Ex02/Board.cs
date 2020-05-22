@@ -31,16 +31,11 @@
             }
         }
 
-        internal GameCell this[int i_Height, int i_Width]
+        internal GameCell[,] BoardCells
         {
             get
             {
-                return m_BoardCells(i_Height, i_Width);
-            }
-
-            set
-            {
-                m_BoardCells(i_Height, i_Width) = value;
+                return m_BoardCells;
             }
         }
 
