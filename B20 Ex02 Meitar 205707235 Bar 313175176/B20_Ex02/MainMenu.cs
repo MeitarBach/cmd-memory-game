@@ -4,15 +4,24 @@ namespace B20_Ex02
 {
     internal class MainMenu
     {
-        internal void CreateGameManager()
+        internal GameManager CreateGameManager()
         {
-            Player firstPlayer = getFirstPlayer();
+            Player firstPlayer = getHumanPlayer();
             Player secondPlayer = getSecondPlayer();
             //eGameLevel gameLevel = getGameLevel();
             Board board = getBoard();
+
+            return new GameManager(firstPlayer, secondPlayer, board);
+
+
+            //// TESTING - Remove later
+            Console.WriteLine($@"Player #1 is {firstPlayer.PlayerType}");
+            Console.WriteLine($@"Player #2 is {secondPlayer.PlayerType}");
+            Console.WriteLine(board.Height);
+            Console.WriteLine(board.Width);
         }
 
-        private Player getFirstPlayer()
+        private Player getHumanPlayer()
         {
             string playerName;
             const bool v_InvalidName = true;
@@ -60,7 +69,7 @@ namespace B20_Ex02
                     secondPlayer = new Player("COMPUTER", ePlayerType.Computer);
                     break;
                 case ePlayerType.Human:
-                    secondPlayer = getFirstPlayer();
+                    secondPlayer = getHumanPlayer();
                     break;
             }
 
