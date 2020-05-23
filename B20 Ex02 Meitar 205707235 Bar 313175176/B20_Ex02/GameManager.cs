@@ -19,7 +19,7 @@ namespace B20_Ex02
         internal bool StartGame()
         {
             bool gameStillActive = true;
-            bool playerFirstTurn = true;
+            Player currentPlayer = m_FirstPlayer;
             BoardPainter boardPainter = new BoardPainter(m_board);
 
             while(gameStillActive && m_board.RestOfCellsToRevealed != 0)
@@ -28,7 +28,6 @@ namespace B20_Ex02
 
                 // show board
                 clearAndPainterBoard(boardPainter);
-                Player currentPlayer = playerFirstTurn ? m_FirstPlayer : m_SecondPlayer;
                 if((cellOne = currentPlayer.PlayerMove(m_board)) == null)
                 {
                     gameStillActive = false;
@@ -51,36 +50,56 @@ namespace B20_Ex02
                 // show board after pick second cell
                 clearAndPainterBoard(boardPainter);
 
-                playerFirstTurn = cellIsEqual(currentPlayer, cellOne, cellTwo) ? playerFirstTurn : !playerFirstTurn;
+                if (cellOne.Letter == cellTwo.Letter)
+                {
+                    currentPlayer.Score++;
+                    m_board.RestOfCellsToRevealed--;
+                    continue;
+                }
+
+                coverCell(cellOne, cellTwo);
+                System.Threading.Thread.Sleep(2000);
+                currentPlayer = togglePlayer(currentPlayer);
             }
 
             if(gameStillActive)
             {
-                howWon();
+                whoWon();
                 gameStillActive = stillWontToPlay();
             }
 
             return gameStillActive;
         }
 
-        private bool cellIsEqual(Player i_currentPlayer ,GameCell i_cellOne, GameCell i_cellTwo)
+        private Player togglePlayer(Player i_Player)
         {
-            bool isEqual = false;
-
-            if (i_cellOne.Letter == i_cellTwo.Letter)
+            Player newPlayer = m_FirstPlayer;
+            if(i_Player == m_FirstPlayer)
             {
-                i_currentPlayer.Score++;
-                m_board.RestOfCellsToRevealed--;
-                isEqual = true;
-            }
-            else
-            {
-                coverCell(i_cellOne, i_cellTwo);
-                System.Threading.Thread.Sleep(2000);
+                newPlayer = m_SecondPlayer;
             }
 
-            return isEqual;
+            return newPlayer;
         }
+
+        //private bool cellIsEqual(Player i_currentPlayer ,GameCell i_cellOne, GameCell i_cellTwo)
+        //{
+        //    bool isEqual = false;
+
+        //    if (i_cellOne.Letter == i_cellTwo.Letter)
+        //    {
+        //        i_currentPlayer.Score++;
+        //        m_board.RestOfCellsToRevealed--;
+        //        isEqual = true;
+        //    }
+        //    else
+        //    {
+        //        coverCell(i_cellOne, i_cellTwo);
+        //        System.Threading.Thread.Sleep(2000);
+        //    }
+
+        //    return isEqual;
+        //}
 
         private bool stillWontToPlay()
         {
@@ -118,7 +137,7 @@ namespace B20_Ex02
             return wontAnotherGame;
         }
 
-        private void howWon()
+        private void whoWon()
         {
             string winnerPlayer = "";
 
