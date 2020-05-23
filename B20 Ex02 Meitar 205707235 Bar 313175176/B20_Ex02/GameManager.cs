@@ -1,6 +1,5 @@
-﻿
-using System;
-using Microsoft.Win32;
+﻿using System;
+using System.Text;
 
 namespace B20_Ex02
 {
@@ -19,30 +18,33 @@ namespace B20_Ex02
 
         internal bool StartGame()
         {
-            bool gameStillActive = true;
-            bool playerOneTurn = true;
+            const bool v_GameStillActive = true;
+            bool playerFirstTurn = true;
             BoardPainter boardPainter = new BoardPainter(m_board);
 
-            while(gameStillActive)
+            while(v_GameStillActive)
             {
                 GameCell cellOne, cellTwo;
 
                 // show board
                 clearAndPainterBoard(boardPainter);
-                Player currentPlayer = playerOneTurn ? m_FirstPlayer : m_SecondPlayer;
+                Player currentPlayer = playerFirstTurn ? m_FirstPlayer : m_SecondPlayer;
 
-                if((cellOne = playerMove(currentPlayer)) == null)
+                if((cellOne = currentPlayer.PlayerMove(m_board)) == null)
                 {
-                    gameStillActive = false;
                     break;
                 }
 
                 // show board after pick one cell
                 clearAndPainterBoard(boardPainter);
 
-                if ((cellTwo = playerMove(currentPlayer)) == null)
+                if (currentPlayer.PlayerType == ePlayerType.Computer)
                 {
-                    gameStillActive = false;
+                    System.Threading.Thread.Sleep(1000);
+                }
+
+                if ((cellTwo = currentPlayer.PlayerMove(m_board)) == null)
+                {
                     break;
                 }
 
@@ -51,28 +53,63 @@ namespace B20_Ex02
 
                 if (cellOne.Letter == cellTwo.Letter)
                 {
-                    m_FirstPlayer.Score++;
+                    currentPlayer.Score++;
                 }
                 else
                 {
                     coverCell(cellOne, cellTwo);
                     System.Threading.Thread.Sleep(2000);
                 }
+
+                playerFirstTurn = (!playerFirstTurn);
             }
 
-            gameStillActive = howWon();
+            howWon();
 
-            return gameStillActive;
+            return stillWontToPlay();
         }
 
-        private bool stillWontToplay()
+        private bool stillWontToPlay()
         {
+            string yesOrNoInput;
+            bool wontAnotherGame, firstTimeMessage = true;
+            const bool v_NotYetAnswered = true;
 
+            MessageDisplayer.DisplayMessage(MessageDisplayer.PlayAnotherGame);
+
+            while (v_NotYetAnswered)
+            {
+                if(!firstTimeMessage)
+                {
+                    MessageDisplayer.DisplayMessage(MessageDisplayer.InvalidPlayAnotherGame);
+                }
+                else
+                {
+                    firstTimeMessage = false;
+                }
+
+                yesOrNoInput = Console.ReadLine();
+
+                if(yesOrNoInput.Equals("yes") || yesOrNoInput.Equals("YES"))
+                {
+                    wontAnotherGame = true;
+                    break;
+                }
+
+                if (yesOrNoInput.Equals("no") || yesOrNoInput.Equals("NO"))
+                {
+                    wontAnotherGame = false;
+                    break;
+                }
+
+            }
+
+            return wontAnotherGame;
         }
 
-        private howWon()
+        private void howWon()
         {
-            string winnerPlayer;
+            string winnerPlayer = "";
 
             if(m_FirstPlayer.Score < m_SecondPlayer.Score)
             {
@@ -90,8 +127,10 @@ namespace B20_Ex02
             }
             else
             {
-
-                MessageDisplayer.DisplayMessage()
+                string msg = string.Format(
+ @"{0} {1}
+ {2}", MessageDisplayer.TheWinnerIs, winnerPlayer, MessageDisplayer.CongratulationsToWinner);
+                MessageDisplayer.DisplayMessage(msg);
             }
         }
 
