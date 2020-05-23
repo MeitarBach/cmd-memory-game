@@ -99,7 +99,7 @@ namespace B20_Ex02
                 else
                 {
                     GameCell inputCell = i_Board.BoardCells[lineNum, colNum];
-                    validMove = inputCell.IsRevealed;
+                    validMove = !inputCell.IsRevealed; // this should be false for a valid move!
                     if(!validMove) // Cell is Revealed
                     {
                         MessageDisplayer.DisplayMessage(MessageDisplayer.InvalidMoveCellRevealed);
