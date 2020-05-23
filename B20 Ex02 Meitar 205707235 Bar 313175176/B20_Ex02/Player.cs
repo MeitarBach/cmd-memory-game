@@ -46,29 +46,38 @@ namespace B20_Ex02
         internal GameCell PlayerMove(Board i_Board)
         {
             GameCell selectedCell = null;
-            const bool v_IvalidInput = true;
 
-            while (v_IvalidInput)
+            if(PlayerType == ePlayerType.Human)
             {
-                MessageDisplayer.DisplayMessage(PlayerName + MessageDisplayer.PlayerMove);
-                string inputMoveFromUser = Console.ReadLine();
+                const bool v_IvalidInput = true;
 
-                if(isLeaving(inputMoveFromUser))
+                while (v_IvalidInput)
                 {
-                    break;
+                    MessageDisplayer.DisplayMessage(PlayerName + MessageDisplayer.PlayerMove);
+                    string inputMoveFromUser = Console.ReadLine();
+
+                    if (isLeaving(inputMoveFromUser))
+                    {
+                        break;
+                    }
+
+                    if (validateMove(inputMoveFromUser, i_Board))
+                    {
+                        selectedCell = i_Board.BoardCells[inputMoveFromUser[1] - 1, inputMoveFromUser[0] - 'A'];
+                        break;
+                    }
                 }
 
-                if (validateMove(inputMoveFromUser, i_Board))
+                if (selectedCell != null)
                 {
-                    selectedCell = i_Board.BoardCells[inputMoveFromUser[1] - 1, inputMoveFromUser[0] - 'A'];
-                    break;
+                    selectedCell.IsRevealed = true;
                 }
             }
-
-            if (selectedCell != null)
+            else // Computer Move
             {
-                selectedCell.IsRevealed = true;
+                
             }
+            
 
             return selectedCell;
         }
