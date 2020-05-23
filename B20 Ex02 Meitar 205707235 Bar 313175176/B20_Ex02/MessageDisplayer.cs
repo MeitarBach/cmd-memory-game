@@ -16,14 +16,16 @@ namespace B20_Ex02
         private const string k_InvalidWidth = "Invalid Width: Not in range 4-6";
         private const string k_InvalidHeight = "Invalid Height: Not in range 4-6";
         private const string k_InvalidSize = "Invalid Size: Width X Height is not even";
-        private const string k_PlayerMove = "'s turn: select a cell to reveal:";
-        private const string k_InvalidMoveOutOfRange = "Invalid move: You entered a cell out of the board's range";
-        private const string k_InvalidMoveCellReveal = "Invalid move: You entered a cell which is revealed";
+        private const string k_PlayerMove = "'s turn:";
+        private const string k_InvalidMoveSyntaxError = "Invalid move: Enter a cell in the correct syntax, i.e: B3";
+        private const string k_InvalidMoveOutOfRange = "Invalid move: You entered a cell which is not in the board's range";
+        private const string k_InvalidMoveCellRevealed = "Invalid move: You entered a cell which is revealed";
         private const string k_TheWinnerIs = "The winner is: ";
         private const string k_CongratulationsToWinner = "Congratulations to the winner";
         private const string k_ThereIsADraw = "There is a drow so maybe next time";
         private const string k_PlayAnotherGame = "Play another game? insert: yes/no";
         private const string k_InvalidPlayAnotherGame = "Invalid input if you wont to play another game? insert: yes/no";
+
 
 
         internal static string EnterPlayer
@@ -129,12 +131,20 @@ namespace B20_Ex02
                 return k_InvalidMoveOutOfRange;
             }
         }
-
-        internal static string InvalidMoveCellReveal
+        
+        internal static string InvalidMoveSyntaxError
         {
             get
             {
-                return k_InvalidMoveCellReveal;
+                return k_InvalidMoveSyntaxError;
+            }
+        }
+
+        internal static string InvalidMoveCellRevealed
+        {
+            get
+            {
+                return k_InvalidMoveCellRevealed;
             }
         }
 
