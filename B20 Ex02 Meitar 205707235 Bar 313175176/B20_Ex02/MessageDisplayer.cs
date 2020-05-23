@@ -5,8 +5,8 @@ namespace B20_Ex02
 {
     internal class MessageDisplayer
     {
-        private const string k_EnterPlayer = "Please Enter Player Name: (no spaces, max 20 chars)";
-        private const string k_ChooseOpponentType = "Choose your oponnent:\t1.Human\t2.Computer";
+        private const string k_EnterPlayer = "Please Enter Player Name: (no spaces, max 20 Letters)";
+        private const string k_ChooseOpponentType = "Choose your oponnent:  1.Human  2.Computer";
         private const string k_NameTooLarge = "Invalid Name: More than 20 chars";
         private const string k_NameContainsSpaces = "Invalid Name: Contains spaces";
         private const string k_InvalidOpponent = "Invalid Oponnent: Choose 1/2";
@@ -21,8 +21,8 @@ namespace B20_Ex02
         private const string k_InvalidMoveOutOfRange = "Invalid move: You entered a cell which is not in the board's range";
         private const string k_InvalidMoveCellRevealed = "Invalid move: You entered a cell which is revealed";
         private const string k_TheWinnerIs = "The winner is: ";
-        private const string k_CongratulationsToWinner = "Congratulations to the winner";
-        private const string k_ThereIsADraw = "There is a drow so maybe next time";
+        private const string k_CongratulationsToWinner = "$$$ Congratulations to the winner $$$";
+        private const string k_ThereIsADraw = "It's a draw, maybe next time :-(";
         private const string k_PlayAnotherGame = "Play another game? insert: yes/no";
         private const string k_InvalidPlayAnotherGame = "Invalid input if you wont to play another game? insert: yes/no";
 

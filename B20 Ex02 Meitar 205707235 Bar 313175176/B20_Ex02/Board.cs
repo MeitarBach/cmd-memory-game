@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace B20_Ex02
 {
@@ -7,7 +8,8 @@ namespace B20_Ex02
         private readonly int r_Height;
         private readonly int r_Width;
         private GameCell[,] m_BoardCells;
-        private int m_RestOfCellsToRevealed;
+        private int m_RemainingCouples;
+        private List<GameCell> m_UnRevealedCells;
 
         internal Board(int i_Height, int i_Width)
         {
@@ -15,8 +17,8 @@ namespace B20_Ex02
             r_Height = i_Height;
             r_Width = i_Width;
             m_BoardCells = new GameCell[r_Height, r_Width];
-            m_RestOfCellsToRevealed = r_Height * r_Width;
-
+            m_RemainingCouples = (r_Height * r_Width) / 2;
+            m_UnRevealedCells = new List<GameCell>();
             createRandomizeBoard();
         }
 
@@ -44,15 +46,23 @@ namespace B20_Ex02
             }
         }
 
-        internal int RestOfCellsToRevealed
+        internal int RemainingCouples
         {
             get
             {
-                return m_RestOfCellsToRevealed;
+                return m_RemainingCouples;
             }
             set
             {
-                RestOfCellsToRevealed = value;
+                m_RemainingCouples = value;
+            }
+        }
+
+        internal List<GameCell> UnRevealedCells
+        {
+            get
+            {
+                return m_UnRevealedCells;
             }
         }
 
@@ -66,6 +76,7 @@ namespace B20_Ex02
                 {
                     char temporaryChar = (char) ('A' + (counterOfFilledCells / 2));
                     m_BoardCells[i, j] = new GameCell(temporaryChar);
+                    m_UnRevealedCells.Add(m_BoardCells[i, j]);
                     counterOfFilledCells++;
                 }
             }

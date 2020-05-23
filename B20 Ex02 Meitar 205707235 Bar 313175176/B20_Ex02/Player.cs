@@ -47,13 +47,12 @@ namespace B20_Ex02
         {
             GameCell selectedCell = null;
 
-            if(PlayerType == ePlayerType.Human)
+            if (PlayerType == ePlayerType.Human)
             {
                 const bool v_IvalidInput = true;
 
                 while (v_IvalidInput)
                 {
-                    MessageDisplayer.DisplayMessage(PlayerName + MessageDisplayer.PlayerMove);
                     string inputMoveFromUser = Console.ReadLine();
 
                     if (isLeaving(inputMoveFromUser))
@@ -67,17 +66,22 @@ namespace B20_Ex02
                         break;
                     }
                 }
-
-                if (selectedCell != null)
-                {
-                    selectedCell.IsRevealed = true;
-                }
             }
             else // Computer Move
             {
+                Random random = new Random();
+                int gameCellIndex = random.Next(i_Board.UnRevealedCells.Count);
+                selectedCell = i_Board.UnRevealedCells[gameCellIndex];
 
             }
-            
+
+            if (selectedCell != null)
+            {
+                selectedCell.IsRevealed = true;
+                i_Board.UnRevealedCells.Remove(selectedCell);
+            }
+
+
             return selectedCell;
         }
 

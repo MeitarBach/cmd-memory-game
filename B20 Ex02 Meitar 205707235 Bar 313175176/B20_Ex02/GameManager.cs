@@ -7,28 +7,29 @@ namespace B20_Ex02
     {
         private Player m_FirstPlayer;
         private Player m_SecondPlayer;
-        private Board m_board;
+        private Board m_Board;
 
         internal GameManager(Player i_FirstPlayer, Player i_SecondPlayer, Board i_board)
         {
             m_FirstPlayer = i_FirstPlayer;
             m_SecondPlayer = i_SecondPlayer;
-            m_board = i_board;
+            m_Board = i_board;
         }
 
         internal bool StartGame()
         {
             bool gameStillActive = true;
             Player currentPlayer = m_FirstPlayer;
-            BoardPainter boardPainter = new BoardPainter(m_board);
+            BoardPainter boardPainter = new BoardPainter(m_Board);
 
-            while(gameStillActive && m_board.RestOfCellsToRevealed != 0)
+            while(gameStillActive && m_Board.RemainingCouples != 0)
             {
                 GameCell cellOne, cellTwo;
 
                 // show board
                 clearAndPainterBoard(boardPainter);
-                if((cellOne = currentPlayer.PlayerMove(m_board)) == null)
+                MessageDisplayer.DisplayMessage(currentPlayer.PlayerName + MessageDisplayer.PlayerMove);
+                if ((cellOne = currentPlayer.PlayerMove(m_Board)) == null)
                 {
                     gameStillActive = false;
                     break;
@@ -36,12 +37,13 @@ namespace B20_Ex02
 
                 // show board after pick one cell
                 clearAndPainterBoard(boardPainter);
+                MessageDisplayer.DisplayMessage(currentPlayer.PlayerName + MessageDisplayer.PlayerMove);
                 if (currentPlayer.PlayerType == ePlayerType.Computer)
                 {
-                    System.Threading.Thread.Sleep(1000);
+                    System.Threading.Thread.Sleep(2000);
                 }
 
-                if ((cellTwo = currentPlayer.PlayerMove(m_board)) == null)
+                if ((cellTwo = currentPlayer.PlayerMove(m_Board)) == null)
                 {
                     gameStillActive = false;
                     break;
@@ -53,7 +55,7 @@ namespace B20_Ex02
                 if (cellOne.Letter == cellTwo.Letter)
                 {
                     currentPlayer.Score++;
-                    m_board.RestOfCellsToRevealed--;
+                    m_Board.RemainingCouples--;
                     continue;
                 }
 
@@ -89,7 +91,7 @@ namespace B20_Ex02
         //    if (i_cellOne.Letter == i_cellTwo.Letter)
         //    {
         //        i_currentPlayer.Score++;
-        //        m_board.RestOfCellsToRevealed--;
+        //        m_Board.RemainingCouples--;
         //        isEqual = true;
         //    }
         //    else
@@ -148,7 +150,7 @@ namespace B20_Ex02
 
             if(m_FirstPlayer.Score > m_SecondPlayer.Score)
             {
-                winnerPlayer = m_SecondPlayer.PlayerName;
+                winnerPlayer = m_FirstPlayer.PlayerName;
             }
 
             if(m_FirstPlayer.Score == m_SecondPlayer.Score)
@@ -159,13 +161,15 @@ namespace B20_Ex02
             {
                 string msg = string.Format(
  @"{0} {1}
- {2}", MessageDisplayer.TheWinnerIs, winnerPlayer, MessageDisplayer.CongratulationsToWinner);
+             {2}", MessageDisplayer.TheWinnerIs, winnerPlayer, MessageDisplayer.CongratulationsToWinner);
                 MessageDisplayer.DisplayMessage(msg);
             }
         }
 
         private void coverCell(GameCell i_CellOne, GameCell i_CellTwo)
         {
+            m_Board.UnRevealedCells.Add(i_CellOne);
+            m_Board.UnRevealedCells.Add(i_CellTwo);
             i_CellOne.IsRevealed = false;
             i_CellTwo.IsRevealed = false;
         }
