@@ -18,11 +18,11 @@ namespace B20_Ex02
 
         internal bool StartGame()
         {
-            const bool v_GameStillActive = true;
+            bool gameStillActive = true;
             bool playerFirstTurn = true;
             BoardPainter boardPainter = new BoardPainter(m_board);
 
-            while(v_GameStillActive)
+            while(gameStillActive)
             {
                 GameCell cellOne, cellTwo;
 
@@ -32,6 +32,7 @@ namespace B20_Ex02
 
                 if((cellOne = currentPlayer.PlayerMove(m_board)) == null)
                 {
+                    gameStillActive = false;
                     break;
                 }
 
@@ -45,6 +46,7 @@ namespace B20_Ex02
 
                 if ((cellTwo = currentPlayer.PlayerMove(m_board)) == null)
                 {
+                    gameStillActive = false;
                     break;
                 }
 
@@ -64,9 +66,13 @@ namespace B20_Ex02
                 playerFirstTurn = (!playerFirstTurn);
             }
 
-            howWon();
+            if(gameStillActive)
+            {
+                howWon();
+                gameStillActive = stillWontToPlay();
+            }
 
-            return stillWontToPlay();
+            return gameStillActive;
         }
 
         private bool stillWontToPlay()
