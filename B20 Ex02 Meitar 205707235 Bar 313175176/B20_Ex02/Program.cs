@@ -10,16 +10,9 @@ namespace B20_Ex02
             //mainMenu.CreateGameManager();
             //Console.ReadLine();
 
-            //Board board = new Board(6,4);
-            //BoardPainter bp = new BoardPainter(board);
-            //bp.PaintBoard();
-            //Console.ReadLine();
-            //Ex02.ConsoleUtils.Screen.Clear();
-            //Console.WriteLine("Screen was cleared...");
-            //Console.ReadLine();
-
-            MemoryGame game = new MemoryGame();
-            game.RunGame();
+            MemoryGame memoryGame = new MemoryGame();
+            memoryGame.RunGame();
+            Console.ReadLine();
         }
     }
 }
