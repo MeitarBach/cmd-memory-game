@@ -10,7 +10,7 @@ namespace B20_Ex02
             //mainMenu.CreateGameManager();
             //Console.ReadLine();
 
-            Board board = new Board(4,6);
+            Board board = new Board(6,4);
             BoardPainter bp = new BoardPainter(board);
             bp.PaintBoard();
             Console.ReadLine();

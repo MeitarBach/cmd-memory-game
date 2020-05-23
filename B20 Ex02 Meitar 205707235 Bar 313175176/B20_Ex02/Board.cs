@@ -4,15 +4,18 @@ namespace B20_Ex02
 {
     internal class Board
     {
-        private int m_Height;
-        private int m_Width;
+        private readonly int r_Height;
+        private readonly int r_Width;
         private GameCell[,] m_BoardCells;
+        private ushort m_RestOfCellsToShow;
 
         internal Board(int i_Height, int i_Width)
         {
-            m_Height = i_Height;
-            m_Width = i_Width;
-            m_BoardCells = new GameCell[m_Height, m_Width];
+
+            r_Height = i_Height;
+            r_Width = i_Width;
+            m_BoardCells = new GameCell[r_Height, r_Width];
+            m_RestOfCellsToShow = 0;
 
             createRandomizeBoard();
         }
@@ -21,7 +24,7 @@ namespace B20_Ex02
         {
             get
             {
-                return m_Height;
+                return r_Height;
             }
         }
 
@@ -29,7 +32,7 @@ namespace B20_Ex02
         {
             get
             {
-                return m_Width;
+                return r_Width;
             }
         }
 
@@ -43,24 +46,15 @@ namespace B20_Ex02
 
         private void createRandomizeBoard()
         {
-            int counterOfChars = 0;
+            int counterOfFilledCells = 0;
 
-            for(int i = 0; i < m_Height; i++)
+            for(int i = 0; i < r_Height; i++)
             {
-                for(int j = 0; j < m_Width; j++)
+                for(int j = 0; j < r_Width; j++)
                 {
-                    char temporaryChar = (char) ('A' + (counterOfChars / 2));
-
-                    if(counterOfChars % 2 == 0)
-                    {
-                        m_BoardCells[i, j] = new GameCell(temporaryChar);
-                    }
-                    else
-                    {
-                        m_BoardCells[i, j] = new GameCell(temporaryChar);
-                    }
-
-                    counterOfChars++;
+                    char temporaryChar = (char) ('A' + (counterOfFilledCells / 2));
+                    m_BoardCells[i, j] = new GameCell(temporaryChar);
+                    counterOfFilledCells++;
                 }
             }
             
@@ -69,22 +63,22 @@ namespace B20_Ex02
 
         private void shuffle()
         {
-            int numberOfCells = m_Height * m_Width;
+            int numberOfCells = r_Height * r_Width;
             Random random = new Random();
 
             for(int i = 0; i < numberOfCells - 1; i++)
             {
+                int firstRow = i / r_Width;
+                int firstColumn = i % r_Width;
+
                 // Pick a random cell between i and the end of the array.
-                int i0 = i / m_Width;
-                int i1 = i % m_Width;
+                int randomizeSecondIndex = random.Next(i + 1);
+                int secondRow = randomizeSecondIndex / r_Width;
+                int secondColumn = randomizeSecondIndex % r_Width;
 
-                int j = random.Next(i + 1);
-                int j0 = j / m_Width;
-                int j1 = j % m_Width;
-
-                GameCell temp = m_BoardCells[i0, i1];
-                m_BoardCells[i0, i1] = m_BoardCells[j0, j1];
-                m_BoardCells[j0, j1] = temp;
+                GameCell temp = m_BoardCells[firstRow, firstColumn];
+                m_BoardCells[firstRow, firstColumn] = m_BoardCells[secondRow, secondColumn];
+                m_BoardCells[secondRow, secondColumn] = temp;
             }
         }
     }
