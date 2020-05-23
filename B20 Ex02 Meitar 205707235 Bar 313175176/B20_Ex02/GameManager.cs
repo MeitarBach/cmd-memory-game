@@ -1,7 +1,7 @@
 ﻿
 namespace B20_Ex02
 {
-    public class GameManager
+    internal class GameManager
     {
         private Player m_FirstPlayer;
         private Player m_SecondPlayer;
