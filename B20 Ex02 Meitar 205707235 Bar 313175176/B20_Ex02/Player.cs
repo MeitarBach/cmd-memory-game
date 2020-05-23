@@ -63,7 +63,7 @@ namespace B20_Ex02
 
                     if (validateMove(inputMoveFromUser, i_Board))
                     {
-                        selectedCell = i_Board.BoardCells[inputMoveFromUser[1] - 1, inputMoveFromUser[0] - 'A'];
+                        selectedCell = i_Board.BoardCells[inputMoveFromUser[1] - '1', inputMoveFromUser[0] - 'A'];
                         break;
                     }
                 }
@@ -75,10 +75,9 @@ namespace B20_Ex02
             }
             else // Computer Move
             {
-                
+
             }
             
-
             return selectedCell;
         }
 
@@ -92,7 +91,7 @@ namespace B20_Ex02
             {
                 int lineNum = i_MoveInput[1] - '1'; 
                 int colNum = i_MoveInput[0] - 'A';
-                validMove = lineNum >= 0 && lineNum <= i_Board.Height && colNum >= 0 && colNum <= i_Board.Width;
+                validMove = lineNum >= 0 && lineNum < i_Board.Height && colNum >= 0 && colNum < i_Board.Width;
                 if(!validMove) // Out of range
                 {
                     MessageDisplayer.DisplayMessage(MessageDisplayer.InvalidMoveOutOfRange);
