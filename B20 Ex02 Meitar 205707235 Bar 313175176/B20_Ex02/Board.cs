@@ -7,7 +7,7 @@ namespace B20_Ex02
         private readonly int r_Height;
         private readonly int r_Width;
         private GameCell[,] m_BoardCells;
-        private ushort m_RestOfCellsToShow;
+        private int m_RestOfCellsToRevealed;
 
         internal Board(int i_Height, int i_Width)
         {
@@ -15,7 +15,7 @@ namespace B20_Ex02
             r_Height = i_Height;
             r_Width = i_Width;
             m_BoardCells = new GameCell[r_Height, r_Width];
-            m_RestOfCellsToShow = 0;
+            m_RestOfCellsToRevealed = r_Height * r_Width;
 
             createRandomizeBoard();
         }
@@ -41,6 +41,18 @@ namespace B20_Ex02
             get
             {
                 return m_BoardCells;
+            }
+        }
+
+        internal int RestOfCellsToRevealed
+        {
+            get
+            {
+                return m_RestOfCellsToRevealed;
+            }
+            set
+            {
+                RestOfCellsToRevealed = value;
             }
         }
 
