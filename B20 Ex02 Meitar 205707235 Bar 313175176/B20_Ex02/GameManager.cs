@@ -19,10 +19,10 @@ namespace B20_Ex02
             bool gameStillActive = true;
             bool playerOneTurn = true;
 
-            while(gameStillActive)
+            while (gameStillActive)
             {
                 // show board
-                if(playerOneTurn)
+                if (playerOneTurn)
                 {
                     MessageDisplayer.DisplayMessage(m_FirstPlayer.PlayerName + MessageDisplayer.PlayerMove);
                     /*
