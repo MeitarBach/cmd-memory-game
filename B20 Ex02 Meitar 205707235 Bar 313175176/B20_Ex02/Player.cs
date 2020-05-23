@@ -46,30 +46,38 @@ namespace B20_Ex02
         internal GameCell PlayerMove(Board i_Board)
         {
             GameCell selectedCell = null;
-            const bool v_IvalidInput = true;
 
-            while (v_IvalidInput)
+            if(PlayerType == ePlayerType.Human)
             {
-                MessageDisplayer.DisplayMessage(PlayerName + MessageDisplayer.PlayerMove);
-                string inputMoveFromUser = Console.ReadLine();
+                const bool v_IvalidInput = true;
 
-                if(isLeaving(inputMoveFromUser))
+                while (v_IvalidInput)
                 {
-                    break;
+                    MessageDisplayer.DisplayMessage(PlayerName + MessageDisplayer.PlayerMove);
+                    string inputMoveFromUser = Console.ReadLine();
+
+                    if (isLeaving(inputMoveFromUser))
+                    {
+                        break;
+                    }
+
+                    if (validateMove(inputMoveFromUser, i_Board))
+                    {
+                        selectedCell = i_Board.BoardCells[inputMoveFromUser[1] - '1', inputMoveFromUser[0] - 'A'];
+                        break;
+                    }
                 }
 
-                if (validateMove(inputMoveFromUser, i_Board))
+                if (selectedCell != null)
                 {
-                    selectedCell = i_Board.BoardCells[inputMoveFromUser[1] - 1, inputMoveFromUser[0] - 'A'];
-                    break;
+                    selectedCell.IsRevealed = true;
                 }
             }
-
-            if (selectedCell != null)
+            else // Computer Move
             {
-                selectedCell.IsRevealed = true;
-            }
 
+            }
+            
             return selectedCell;
         }
 
@@ -83,7 +91,7 @@ namespace B20_Ex02
             {
                 int lineNum = i_MoveInput[1] - '1'; 
                 int colNum = i_MoveInput[0] - 'A';
-                validMove = lineNum >= 0 && lineNum <= i_Board.Height && colNum >= 0 && colNum <= i_Board.Width;
+                validMove = lineNum >= 0 && lineNum < i_Board.Height && colNum >= 0 && colNum < i_Board.Width;
                 if(!validMove) // Out of range
                 {
                     MessageDisplayer.DisplayMessage(MessageDisplayer.InvalidMoveOutOfRange);
@@ -91,7 +99,7 @@ namespace B20_Ex02
                 else
                 {
                     GameCell inputCell = i_Board.BoardCells[lineNum, colNum];
-                    validMove = inputCell.IsRevealed;
+                    validMove = !inputCell.IsRevealed; // this should be false for a valid move!
                     if(!validMove) // Cell is Revealed
                     {
                         MessageDisplayer.DisplayMessage(MessageDisplayer.InvalidMoveCellRevealed);

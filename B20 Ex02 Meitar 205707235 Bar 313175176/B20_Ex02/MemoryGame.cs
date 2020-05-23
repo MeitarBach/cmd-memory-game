@@ -19,11 +19,6 @@ namespace B20_Ex02
                 Board board = MainMenu.getBoard();
                 GameManager gameManager = new GameManager(firstPlayer, secondPlayer, board);
                 keepGameAlive = gameManager.StartGame();
-
-                new BoardPainter(board).PaintBoard();
-                Console.WriteLine("Playing...");
-                Thread.Sleep(50000);
-                Ex02.ConsoleUtils.Screen.Clear();
             }
             while(keepGameAlive);
         }
