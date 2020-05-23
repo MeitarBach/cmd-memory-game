@@ -9,10 +9,11 @@ namespace B20_Ex02
         //    Player firstPlayer = getHumanPlayer();
         //    Player secondPlayer = getSecondPlayer();
         //    //eGameLevel gameLevel = getGameLevel();
-        //    Board board = getBoard();
+        //    while(){
+        //           Board board = getBoard();
 
-        //    return new GameManager(firstPlayer, secondPlayer, board);
-
+        //           GameManager gm = GameManager(firstPlayer, secondPlayer, board);
+        //           bool bo = gm.StartGame();
 
         //    //// TESTING - Remove later
         //    Console.WriteLine($@"Player #1 is {firstPlayer.PlayerType}");

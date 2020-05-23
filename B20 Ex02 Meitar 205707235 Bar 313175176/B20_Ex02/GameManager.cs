@@ -14,7 +14,7 @@ namespace B20_Ex02
             m_board = i_board;
         }
 
-        internal void StartGame()
+        internal bool StartGame()
         {
             bool gameStillActive = true;
             bool playerOneTurn = true;
@@ -69,6 +69,8 @@ namespace B20_Ex02
                 }
 
             }
+
+            return true;
         }
 
         //private GameCell playerMove()
