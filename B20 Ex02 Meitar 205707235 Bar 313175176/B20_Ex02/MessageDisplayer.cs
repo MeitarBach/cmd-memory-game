@@ -6,7 +6,7 @@ namespace B20_Ex02
     internal class MessageDisplayer
     {
         private const string k_EnterPlayer = "Please Enter Player Name: (no spaces, max 20 chars)";
-        private const string k_ChooseOpponentType = "Choose your oponnent: 1.Human\t2.Computer";
+        private const string k_ChooseOpponentType = "Choose your oponnent:\t1.Human\t2.Computer";
         private const string k_NameTooLarge = "Invalid Name: More than 20 chars";
         private const string k_NameContainsSpaces = "Invalid Name: Contains spaces";
         private const string k_InvalidOpponent = "Invalid Oponnent: Choose 1/2";
