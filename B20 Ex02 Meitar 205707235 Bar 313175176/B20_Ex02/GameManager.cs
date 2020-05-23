@@ -22,7 +22,7 @@ namespace B20_Ex02
             bool playerFirstTurn = true;
             BoardPainter boardPainter = new BoardPainter(m_board);
 
-            while(gameStillActive)
+            while(gameStillActive && m_board.RestOfCellsToRevealed != 0)
             {
                 GameCell cellOne, cellTwo;
 
@@ -53,17 +53,7 @@ namespace B20_Ex02
                 // show board after pick second cell
                 clearAndPainterBoard(boardPainter);
 
-                if (cellOne.Letter == cellTwo.Letter)
-                {
-                    currentPlayer.Score++;
-                }
-                else
-                {
-                    coverCell(cellOne, cellTwo);
-                    System.Threading.Thread.Sleep(2000);
-                }
-
-                playerFirstTurn = (!playerFirstTurn);
+                playerFirstTurn = cellIsEqual(currentPlayer, cellOne, cellTwo) ? playerFirstTurn : !playerFirstTurn;
             }
 
             if(gameStillActive)
@@ -73,6 +63,25 @@ namespace B20_Ex02
             }
 
             return gameStillActive;
+        }
+
+        private bool cellIsEqual(Player i_currentPlayer ,GameCell i_cellOne, GameCell i_cellTwo)
+        {
+            bool isEqual = false;
+
+            if (i_cellOne.Letter == i_cellTwo.Letter)
+            {
+                i_currentPlayer.Score++;
+                m_board.RestOfCellsToRevealed--;
+                isEqual = true;
+            }
+            else
+            {
+                coverCell(i_cellOne, i_cellTwo);
+                System.Threading.Thread.Sleep(2000);
+            }
+
+            return isEqual;
         }
 
         private bool stillWontToPlay()
