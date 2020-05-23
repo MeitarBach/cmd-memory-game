@@ -21,7 +21,7 @@ namespace B20_Ex02
         //    Console.WriteLine(board.Width);
         //}
 
-        private Player getHumanPlayer()
+        internal static Player getHumanPlayer()
         {
             string playerName;
             const bool v_InvalidName = true;
@@ -40,7 +40,7 @@ namespace B20_Ex02
             return new Player(playerName, ePlayerType.Human);
         }
 
-        private Player getSecondPlayer()
+        internal static Player getSecondPlayer()
         {
             Player secondPlayer = null;
             const bool v_InvalidType = true;
@@ -76,7 +76,7 @@ namespace B20_Ex02
             return secondPlayer;
         }
 
-        private Board getBoard()
+        internal static Board getBoard()
         {
             const bool v_InvalidBoard = true;
             int boardWidth;

@@ -14,6 +14,9 @@ namespace B20_Ex02
             BoardPainter bp = new BoardPainter(board);
             bp.PaintBoard();
             Console.ReadLine();
+            Ex02.ConsoleUtils.Screen.Clear();
+            Console.WriteLine("Screen was cleared...");
+            Console.ReadLine();
         }
     }
 }
