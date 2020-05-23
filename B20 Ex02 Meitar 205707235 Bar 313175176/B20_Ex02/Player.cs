@@ -1,4 +1,6 @@
-﻿namespace B20_Ex02
+﻿using System;
+
+namespace B20_Ex02
 {
     internal class Player
     {
@@ -43,39 +45,65 @@
 
         internal GameCell PlayerMove(Board i_Board)
         {
-            GameCell selectedCall = null;
-            bool inputIsValid = false;
+            GameCell selectedCell = null;
+            const bool v_IvalidInput = true;
 
-            MessageDisplayer.DisplayMessage(i_currentPlayer.PlayerName + MessageDisplayer.PlayerMove);
-
-            while (!inputIsValid)
+            while (v_IvalidInput)
             {
+                MessageDisplayer.DisplayMessage(PlayerName + MessageDisplayer.PlayerMove);
                 string inputMoveFromUser = Console.ReadLine();
 
-                inputIsValid = isLeaving(inputMoveFromUser);
-
-                if (validMove(inputMoveFromUser))
+                if(isLeaving(inputMoveFromUser))
                 {
-                    selectedCall = m_board.BoardCells[inputMoveFromUser[1] - 1, inputMoveFromUser[0] - 'A'];
-                    inputIsValid = true;
+                    break;
+                }
+
+                if (validateMove(inputMoveFromUser, i_Board))
+                {
+                    selectedCell = i_Board.BoardCells[inputMoveFromUser[1] - 1, inputMoveFromUser[0] - 'A'];
+                    break;
                 }
             }
 
-            if (selectedCall != null)
+            if (selectedCell != null)
             {
-                selectedCall.IsRevealed = true;
+                selectedCell.IsRevealed = true;
             }
 
-            return selectedCall;
+            return selectedCell;
         }
 
-        private bool validMove(string i_MoveInput)
+        private bool validateMove(string i_MoveInput, Board i_Board)
         {
-            bool isValidMove = (i_MoveInput.Length == 2);
-            isValidMove = isValidMove && (i_MoveInput[0] >= 'A' || i_MoveInput[0] <= ('A' + m_board.Width - 1));
-            isValidMove = (i_MoveInput[1] >= 0 || i_MoveInput[1] <= (m_board.Height + 1));
+            bool validMove = i_MoveInput.Length == 2 &&
+                             i_MoveInput[0] >= 'A' && i_MoveInput[0] <= 'F' &&
+                             i_MoveInput[1] >= '1' && i_MoveInput[1] <= '6';
 
-            return isValidMove;
+            if(validMove) // valid syntax
+            {
+                int lineNum = i_MoveInput[1] - '1'; 
+                int colNum = i_MoveInput[0] - 'A';
+                validMove = lineNum >= 0 && lineNum <= i_Board.Height && colNum >= 0 && colNum <= i_Board.Width;
+                if(!validMove) // Out of range
+                {
+                    MessageDisplayer.DisplayMessage(MessageDisplayer.InvalidMoveOutOfRange);
+                }
+                else
+                {
+                    GameCell inputCell = i_Board.BoardCells[lineNum, colNum];
+                    validMove = inputCell.IsRevealed;
+                    if(!validMove) // Cell is Revealed
+                    {
+                        MessageDisplayer.DisplayMessage(MessageDisplayer.InvalidMoveCellRevealed);
+                    }
+                }
+            }
+            else // invalid syntax
+            {
+                MessageDisplayer.DisplayMessage(MessageDisplayer.InvalidMoveSyntaxError);
+            }
+
+            return validMove;
         }
 
         private bool isLeaving(string i_MoveInput)
