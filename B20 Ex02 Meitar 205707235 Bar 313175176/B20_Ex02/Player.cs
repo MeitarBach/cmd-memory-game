@@ -41,7 +41,7 @@
             }
         }
 
-        private GameCell playerMove(Player i_currentPlayer)
+        internal GameCell PlayerMove(Board i_Board)
         {
             GameCell selectedCall = null;
             bool inputIsValid = false;
