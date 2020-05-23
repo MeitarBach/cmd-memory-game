@@ -83,9 +83,7 @@ namespace B20_Ex02
 
         private bool validateMove(string i_MoveInput, Board i_Board)
         {
-            bool validMove = i_MoveInput.Length == 2 &&
-                             i_MoveInput[0] >= 'A' && i_MoveInput[0] <= 'F' &&
-                             i_MoveInput[1] >= '1' && i_MoveInput[1] <= '6';
+            bool validMove = i_MoveInput.Length == 2 && char.IsUpper(i_MoveInput[0]) && char.IsDigit(i_MoveInput[1]);
 
             if(validMove) // valid syntax
             {
