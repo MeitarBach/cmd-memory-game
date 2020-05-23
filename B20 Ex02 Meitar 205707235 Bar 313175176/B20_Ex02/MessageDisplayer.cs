@@ -22,7 +22,9 @@ namespace B20_Ex02
         private const string k_InvalidMoveCellRevealed = "Invalid move: You entered a cell which is revealed";
         private const string k_TheWinnerIs = "The winner is: ";
         private const string k_CongratulationsToWinner = "Congratulations to the winner";
-        private const string k_ThereIsADraw = "There is a draw so maybe next time";
+        private const string k_ThereIsADraw = "There is a drow so maybe next time";
+        private const string k_PlayAnotherGame = "Play another game? insert: yes/no";
+        private const string k_InvalidPlayAnotherGame = "Invalid input if you wont to play another game? insert: yes/no";
 
 
 
@@ -170,6 +172,21 @@ namespace B20_Ex02
             }
         }
 
+        internal static string PlayAnotherGame
+        {
+            get
+            {
+                return k_PlayAnotherGame;
+            }
+        }
+
+        internal static string InvalidPlayAnotherGame
+        {
+            get
+            {
+                return k_InvalidPlayAnotherGame;
+            }
+        }
 
         internal static void DisplayMessage(string i_Msg)
         {
