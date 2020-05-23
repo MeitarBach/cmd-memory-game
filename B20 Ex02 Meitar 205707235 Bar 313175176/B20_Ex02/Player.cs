@@ -8,7 +8,7 @@
 
         internal Player(string i_PlayerName, ePlayerType i_PlayerType)
         {
-            m_PlayerName = i_PlayerName;
+            r_PlayerName = i_PlayerName;
             m_PlayerType = i_PlayerType;
             m_Score = 0;
         }

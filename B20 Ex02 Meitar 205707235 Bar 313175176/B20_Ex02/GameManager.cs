@@ -36,7 +36,7 @@ namespace B20_Ex02
                     }
                     else
                     {
-                        sleep 2 sec
+                        System.Threading.Thread.Sleep(2000);
                     }
 
                     clear boar
@@ -44,6 +44,7 @@ namespace B20_Ex02
                 }
                 else
                 {
+
                     MessageDisplayer.DisplayMessage(m_SecondPlayer.PlayerName + MessageDisplayer.PlayerMove);
                     /*
                     cell = playerMove(); 1
@@ -60,7 +61,7 @@ namespace B20_Ex02
                     }
                     else
                     {
-]                        sleep 2 sec
+]                       System.Threading.Thread.Sleep(2000);
                     }
 
                     clear boar
