@@ -29,7 +29,6 @@ namespace B20_Ex02
                 // show board
                 clearAndPainterBoard(boardPainter);
                 Player currentPlayer = playerFirstTurn ? m_FirstPlayer : m_SecondPlayer;
-
                 if((cellOne = currentPlayer.PlayerMove(m_board)) == null)
                 {
                     gameStillActive = false;
@@ -38,7 +37,6 @@ namespace B20_Ex02
 
                 // show board after pick one cell
                 clearAndPainterBoard(boardPainter);
-
                 if (currentPlayer.PlayerType == ePlayerType.Computer)
                 {
                     System.Threading.Thread.Sleep(1000);
@@ -91,7 +89,6 @@ namespace B20_Ex02
             const bool v_NotYetAnswered = true;
 
             MessageDisplayer.DisplayMessage(MessageDisplayer.PlayAnotherGame);
-
             while (v_NotYetAnswered)
             {
                 if(!firstTimeMessage)
@@ -104,7 +101,6 @@ namespace B20_Ex02
                 }
 
                 yesOrNoInput = Console.ReadLine();
-
                 if(yesOrNoInput.Equals("yes") || yesOrNoInput.Equals("YES"))
                 {
                     wontAnotherGame = true;
