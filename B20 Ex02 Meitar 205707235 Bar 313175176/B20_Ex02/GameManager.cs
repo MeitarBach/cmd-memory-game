@@ -65,11 +65,19 @@ namespace B20_Ex02
             return gameStillActive;
         }
 
+<<<<<<< HEAD
         private void coverCell(GameCell i_CellOne, GameCell i_CellTwo)
         {
             i_CellOne.CellIsShow = false;
             i_CellTwo.CellIsShow = false;
         }
+=======
+        //private GameCell playerMove()
+        //{
+        //    // validMove();
+        //    // move
+        //}
+>>>>>>> 400e34242a8c4a23127fa02d72218d7067765ac5
 
         private void clearAndPainterBoard(BoardPainter i_BoardPainter)
         {
