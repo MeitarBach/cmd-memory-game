@@ -17,11 +17,8 @@ namespace B20_Ex02
         private const string k_InvalidHeight = "Invalid Height: Not in range 4-6";
         private const string k_InvalidSize = "Invalid Size: Width X Height is not even";
         private const string k_PlayerMove = "'s turn: select a cell to reveal:";
-        private const string k_InvalidMoveOutOfRange = "Invalid move: Cell of board's range";
-        private const string k_InvalidMoveCellReveal = "Invalid move: Cell is revealed";
-
-
-
+        private const string k_InvalidMoveOutOfRange = "Invalid move: You entered a cell out of the board's range";
+        private const string k_InvalidMoveCellReveal = "Invalid move: You entered a cell which is revealed";
 
         internal static string EnterPlayer
         {

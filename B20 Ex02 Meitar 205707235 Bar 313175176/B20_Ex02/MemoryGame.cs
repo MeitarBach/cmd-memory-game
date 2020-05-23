@@ -22,7 +22,8 @@ namespace B20_Ex02
 
                 new BoardPainter(board).PaintBoard();
                 Console.WriteLine("Playing...");
-                Thread.Sleep(100000);
+                Thread.Sleep(50000);
+                Ex02.ConsoleUtils.Screen.Clear();
             }
             while(keepGameAlive);
         }
