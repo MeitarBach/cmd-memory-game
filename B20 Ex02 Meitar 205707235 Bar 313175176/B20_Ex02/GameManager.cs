@@ -97,8 +97,8 @@ namespace B20_Ex02
 
         private void coverCell(GameCell i_CellOne, GameCell i_CellTwo)
         {
-            i_CellOne.CellIsShow = false;
-            i_CellTwo.CellIsShow = false;
+            i_CellOne.IsRevealed = false;
+            i_CellTwo.IsRevealed = false;
         }
 
         private void clearAndPainterBoard(BoardPainter i_BoardPainter)
@@ -107,46 +107,5 @@ namespace B20_Ex02
             i_BoardPainter.PaintBoard();
         }
 
-        private GameCell playerMove(Player i_currentPlayer)
-        {
-            GameCell selectedCall = null;
-            bool inputIsValid = false;
-
-            MessageDisplayer.DisplayMessage(i_currentPlayer.PlayerName + MessageDisplayer.PlayerMove);
-
-            while (!inputIsValid)
-            {
-                string inputMoveFromUser = Console.ReadLine();
-
-                inputIsValid = isLeaving(inputMoveFromUser);
-
-                if(validMove(inputMoveFromUser))
-                {
-                    selectedCall = m_board.BoardCells[inputMoveFromUser[1] - 1, inputMoveFromUser[0] - 'A'];
-                    inputIsValid = true;
-                }
-            }
-
-            if(selectedCall != null)
-            {
-                selectedCall.CellIsShow = true;
-            }
-
-            return selectedCall;
-        }
-
-        private bool validMove(string i_MoveInput)
-        {
-            bool isValidMove = (i_MoveInput.Length == 2);
-            isValidMove &= (i_MoveInput[0] >= 'A' || i_MoveInput[0] <= ('A' + m_board.Width - 1));
-            isValidMove &= (i_MoveInput[1] >= 0 || i_MoveInput[1] <= (m_board.Height + 1));
-
-            return isValidMove;
-        }
-
-        private bool isLeaving(string i_MoveInput)
-        {
-            return (i_MoveInput.Length == 1) && (i_MoveInput[0] == 'Q');
-        }
     }
 }

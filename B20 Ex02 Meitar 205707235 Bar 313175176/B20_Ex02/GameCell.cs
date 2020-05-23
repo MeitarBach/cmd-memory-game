@@ -2,15 +2,15 @@
 
 namespace B20_Ex02
 {
-    public class GameCell
+    internal class GameCell
     {
         private readonly char r_Letter;
-        private bool m_CellIsShow;
+        private bool m_IsRevealed;
 
         internal GameCell(char i_Letter)
         {
             r_Letter = i_Letter;
-            m_CellIsShow = true;
+            m_IsRevealed = true;
         }
 
         internal char Letter
@@ -21,23 +21,23 @@ namespace B20_Ex02
             }
         }
 
-        internal bool CellIsShow
+        internal bool IsRevealed
         {
             get
             {
-                return m_CellIsShow;
+                return m_IsRevealed;
             }
 
             set
             {
-                m_CellIsShow = value;
+                m_IsRevealed = value;
             }
         }
 
         public override string ToString()
         {
             StringBuilder cellSB = new StringBuilder(" ");
-            if(m_CellIsShow)
+            if(m_IsRevealed)
             {
                 cellSB.Append(r_Letter);
             }
