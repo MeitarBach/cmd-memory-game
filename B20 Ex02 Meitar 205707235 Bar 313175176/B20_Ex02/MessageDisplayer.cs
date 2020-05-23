@@ -19,6 +19,11 @@ namespace B20_Ex02
         private const string k_PlayerMove = "'s turn: select a cell to reveal:";
         private const string k_InvalidMoveOutOfRange = "Invalid move: You entered a cell out of the board's range";
         private const string k_InvalidMoveCellReveal = "Invalid move: You entered a cell which is revealed";
+        private const string k_TheWinnerIs = "The winner is: ";
+        private const string k_CongratulationsToWinner = "Congratulations to the winner";
+        private const string k_ThereIsADraw = "There is a drow so maybe next time";
+
+
 
         internal static string EnterPlayer
         {
@@ -131,6 +136,31 @@ namespace B20_Ex02
                 return k_InvalidMoveCellReveal;
             }
         }
+
+        internal static string TheWinnerIs
+        {
+            get
+            {
+                return k_TheWinnerIs;
+            }
+        }
+
+        internal static string CongratulationsToWinner
+        {
+            get
+            {
+                return k_CongratulationsToWinner;
+            }
+        }
+
+        internal static string ThereIsADraw
+        {
+            get
+            {
+                return k_ThereIsADraw;
+            }
+        }
+
 
         internal static void DisplayMessage(string i_Msg)
         {
