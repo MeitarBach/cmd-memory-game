@@ -1,4 +1,7 @@
 ﻿
+using System;
+using Microsoft.Win32;
+
 namespace B20_Ex02
 {
     internal class GameManager
@@ -18,68 +21,102 @@ namespace B20_Ex02
         {
             bool gameStillActive = true;
             bool playerOneTurn = true;
+            BoardPainter boardPainter = new BoardPainter(m_board);
 
-            while (gameStillActive)
+            while(gameStillActive)
             {
-                // show board
-                if (playerOneTurn)
-                {
-                    MessageDisplayer.DisplayMessage(m_FirstPlayer.PlayerName + MessageDisplayer.PlayerMove);
-                    /*
-                    cell = playerMove(); 1
-                    clear boar
-                    cell = playerMove(); 2
-                    if(match)
-                    {
-                        m_FirstPlayer.Score++;
-                        m_board.
-                    }
-                    else
-                    {
-                        System.Threading.Thread.Sleep(2000);
-                    }
+                GameCell cellOne, cellTwo;
 
-                    clear boar
-                    */
+                // show board
+                clearAndPainterBoard(boardPainter);
+                Player currentPlayer = playerOneTurn ? m_FirstPlayer : m_SecondPlayer;
+
+                if((cellOne = playerMove(currentPlayer)) == null)
+                {
+                    gameStillActive = false;
+                    break;
                 }
+
+                // show board after pick one cell
+                clearAndPainterBoard(boardPainter);
+
+                if ((cellTwo = playerMove(currentPlayer)) == null)
+                {
+                    gameStillActive = false;
+                    break;
+                }
+
+                // show board after pick second cell
+                clearAndPainterBoard(boardPainter);
+
+                if (cellOne.Letter == cellTwo.Letter)
+                {
+                    m_FirstPlayer.Score++;
+]                }
                 else
                 {
-
-                    MessageDisplayer.DisplayMessage(m_SecondPlayer.PlayerName + MessageDisplayer.PlayerMove);
-                    /*
-                    cell = playerMove(); 1
-                    clear boar
-                    if(m_SecondPlayer.PlayerType.Computer)
-                    {
-                        
-                    }
-                    cell = playerMove(); 2
-                    if(match)
-                    {
-                        m_FirstPlayer.Score++;
-                        m_board.
-                    }
-                    else
-                    {
-]                       System.Threading.Thread.Sleep(2000);
-                    }
-
-                    clear boar
-                    */
+                    coverCell(cellOne, cellTwo);
+                    System.Threading.Thread.Sleep(2000);
                 }
-
             }
 
-            return true;
+            howWon();
+
+            return gameStillActive;
         }
 
-        private GameCell playerMove()
+        private void coverCell(GameCell i_CellOne, GameCell i_CellTwo)
         {
-            // validMove();
-            // move
+            i_CellOne.CellIsShow = false;
+            i_CellTwo.CellIsShow = false;
         }
 
+        private void clearAndPainterBoard(BoardPainter i_BoardPainter)
+        {
+            Ex02.ConsoleUtils.Screen.Clear();
+            i_BoardPainter.PaintBoard();
+        }
 
+        private GameCell playerMove(Player i_currentPlayer)
+        {
+            GameCell selectedCall = null;
+            bool inputIsValid = false;
 
+            MessageDisplayer.DisplayMessage(i_currentPlayer.PlayerName + MessageDisplayer.PlayerMove);
+
+            while (!inputIsValid)
+            {
+                string inputMoveFromUser = Console.ReadLine();
+
+                inputIsValid = isLeaving(inputMoveFromUser);
+
+                if(validMove(inputMoveFromUser))
+                {
+                    selectedCall = m_board.BoardCells[inputMoveFromUser[1] - 1, inputMoveFromUser[0] - 'A'];
+                    inputIsValid = true;
+                }
+            }
+
+            if(selectedCall != null)
+            {
+                selectedCall.CellIsShow = true;
+            }
+
+            return selectedCall;
+        }
+
+        private bool validMove(string i_MoveInput)
+        {
+            bool isValidMove = (i_MoveInput.Length == 2);
+            isValidMove &= (i_MoveInput[0] >= 'A' || i_MoveInput[0] <= ('A' + m_board.Width - 1));
+            isValidMove &= (i_MoveInput[1] >= 0 || i_MoveInput[1] <= (m_board.Height + 1));
+
+            return isValidMove;
+        }
+
+        private bool isLeaving(string i_MoveInput)
+        {
+            return (i_MoveInput.Length == 1) && (i_MoveInput[0] == 'Q');
+        }
     }
 }
