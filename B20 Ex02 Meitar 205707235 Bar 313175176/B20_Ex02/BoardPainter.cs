@@ -12,8 +12,9 @@ namespace B20_Ex02
             m_Board = i_Board;
         }
 
-        internal void PaintBoard()
+        internal void ClearAndPaintBoard()
         {
+            Ex02.ConsoleUtils.Screen.Clear();
             StringBuilder boardPainting = new StringBuilder();
 
             //// Create a row seperator

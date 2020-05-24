@@ -27,7 +27,7 @@ namespace B20_Ex02
                 GameCell cellOne, cellTwo;
 
                 // show board
-                clearAndPainterBoard(boardPainter);
+                boardPainter.ClearAndPaintBoard();
                 MessageDisplayer.DisplayMessage(currentPlayer.PlayerName + MessageDisplayer.PlayerMove);
                 if ((cellOne = currentPlayer.PlayerMove(m_Board)) == null)
                 {
@@ -36,7 +36,7 @@ namespace B20_Ex02
                 }
 
                 // show board after pick one cell
-                clearAndPainterBoard(boardPainter);
+                boardPainter.ClearAndPaintBoard();
                 MessageDisplayer.DisplayMessage(currentPlayer.PlayerName + MessageDisplayer.PlayerMove);
                 if (currentPlayer.PlayerType == ePlayerType.Computer)
                 {
@@ -50,7 +50,7 @@ namespace B20_Ex02
                 }
 
                 // show board after pick second cell
-                clearAndPainterBoard(boardPainter);
+                boardPainter.ClearAndPaintBoard();
 
                 if (cellOne.Letter == cellTwo.Letter)
                 {
@@ -177,7 +177,7 @@ namespace B20_Ex02
         private void clearAndPainterBoard(BoardPainter i_BoardPainter)
         {
             Ex02.ConsoleUtils.Screen.Clear();
-            i_BoardPainter.PaintBoard();
+            i_BoardPainter.ClearAndPaintBoard();
         }
 
     }
