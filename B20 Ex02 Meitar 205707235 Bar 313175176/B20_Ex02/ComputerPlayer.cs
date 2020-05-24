@@ -80,16 +80,15 @@ namespace B20_Ex02
             {
                 m_RevealedCouples.Push(i_GameCell);
                 m_RevealedCouples.Push(gameCellMatch);
+                i_Board.UnRevealedCells.Remove(i_GameCell);
             }
             else
             {
-                addByLevelGame(i_GameCell); // Add by the difficulty of the game level
+                addByLevelGame(i_Board, i_GameCell); // Add to the revealed list by the difficulty of the game level
             }
-
-            i_Board.UnRevealedCells.Remove(i_GameCell);
         }
 
-        private void addByLevelGame(GameCell i_GameCell)
+        private void addByLevelGame(Board i_Board, GameCell i_GameCell)
         {
             Random random = new Random();
             int randomizeToAdd = random.Next(10);
@@ -100,6 +99,7 @@ namespace B20_Ex02
                     if(randomizeToAdd <= 4) // 50% (Half) of the times algorithm will add
                     {
                         m_RevealedCells.Add(i_GameCell);
+                        i_Board.UnRevealedCells.Remove(i_GameCell);
                     }
 
                     break;
@@ -107,11 +107,13 @@ namespace B20_Ex02
                     if (randomizeToAdd <= 7) // 80% the times algorithm will add
                     {
                         m_RevealedCells.Add(i_GameCell);
+                        i_Board.UnRevealedCells.Remove(i_GameCell);
                     }
 
                     break;
                 case eGameLevel.Hard: // 100% the times algorithm will add
                     m_RevealedCells.Add(i_GameCell);
+                    i_Board.UnRevealedCells.Remove(i_GameCell);
                     break;
             }
 
