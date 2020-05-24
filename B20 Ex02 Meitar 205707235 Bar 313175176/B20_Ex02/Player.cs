@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace B20_Ex02
 {
@@ -7,6 +8,7 @@ namespace B20_Ex02
         private readonly string r_PlayerName;
         private ePlayerType m_PlayerType;
         private ushort m_Score;
+
 
         internal Player(string i_PlayerName, ePlayerType i_PlayerType)
         {
