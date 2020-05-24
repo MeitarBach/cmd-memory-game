@@ -25,7 +25,8 @@ namespace B20_Ex02
         private const string k_ThereIsADraw = "It's a draw, maybe next time :-(";
         private const string k_PlayAnotherGame = "Play another game? insert: yes/no";
         private const string k_InvalidPlayAnotherGame = "Invalid input if you wont to play another game? insert: yes/no";
-
+        private const string k_SelectDifficultyLevel = "Select difficulty level:  1.Easy  2.Medium  3.Hard";
+        private const string k_InvalidDifficultyLevel = "Invalid difficulty level, Please Choose:  1.Easy  2.Medium  3.Hard";
 
 
         internal static string EnterPlayer
@@ -185,6 +186,23 @@ namespace B20_Ex02
             get
             {
                 return k_InvalidPlayAnotherGame;
+            }
+        }
+
+
+        internal static string InvalidDifficultyLevel
+        {
+            get
+            {
+                return k_InvalidDifficultyLevel;
+            }
+        }
+
+        internal static string SelectDifficultyLevel
+        {
+            get
+            {
+                return k_SelectDifficultyLevel;
             }
         }
 
