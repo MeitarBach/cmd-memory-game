@@ -41,63 +41,6 @@ namespace B20_Ex02
             return m_Board.RemainingCouples == 0;
         }
 
-        internal bool StartGame()
-        {
-            bool gameStillActive = true;
-            Player currentPlayer = m_FirstPlayer;
-            BoardPainter boardPainter = new BoardPainter(m_Board);
-
-            while(gameStillActive && m_Board.RemainingCouples != 0)
-            {
-                GameCell cellOne, cellTwo;
-
-                // show board
-                boardPainter.ClearAndPaintBoard();
-                MessageDisplayer.DisplayMessage(currentPlayer.PlayerName + MessageDisplayer.PlayerMove);
-                if ((cellOne = currentPlayer.PlayerMove(m_Board)) == null)
-                {
-                    gameStillActive = false;
-                    break;
-                }
-
-                // show board after pick one cell
-                boardPainter.ClearAndPaintBoard();
-                MessageDisplayer.DisplayMessage(currentPlayer.PlayerName + MessageDisplayer.PlayerMove);
-                if (currentPlayer.PlayerType == ePlayerType.Computer)
-                {
-                    System.Threading.Thread.Sleep(2000);
-                }
-
-                if ((cellTwo = currentPlayer.PlayerMove(m_Board)) == null)
-                {
-                    gameStillActive = false;
-                    break;
-                }
-
-                // show board after pick second cell
-                boardPainter.ClearAndPaintBoard();
-
-                if (cellOne.Letter == cellTwo.Letter)
-                {
-                    currentPlayer.Score++;
-                    m_Board.RemainingCouples--;
-                    continue;
-                }
-
-                coverCell(cellOne, cellTwo);
-                System.Threading.Thread.Sleep(2000);
-                currentPlayer = togglePlayer(currentPlayer);
-            }
-
-            if(gameStillActive)
-            {
-                AnnounceWinner();
-                gameStillActive = stillWantToPlay();
-            }
-
-            return gameStillActive;
-        }
-
         private Player togglePlayer(Player i_Player)
         {
             Player newPlayer = m_FirstPlayer;
@@ -107,61 +50,6 @@ namespace B20_Ex02
             }
 
             return newPlayer;
-        }
-
-        //private bool cellIsEqual(Player i_currentPlayer ,GameCell i_cellOne, GameCell i_cellTwo)
-        //{
-        //    bool isEqual = false;
-
-        //    if (i_cellOne.Letter == i_cellTwo.Letter)
-        //    {
-        //        i_currentPlayer.Score++;
-        //        m_Board.RemainingCouples--;
-        //        isEqual = true;
-        //    }
-        //    else
-        //    {
-        //        coverCell(i_cellOne, i_cellTwo);
-        //        System.Threading.Thread.Sleep(2000);
-        //    }
-
-        //    return isEqual;
-        //}
-
-        private bool stillWantToPlay()
-        {
-            string yesOrNoInput;
-            bool wontAnotherGame, firstTimeMessage = true;
-            const bool v_NotYetAnswered = true;
-
-            MessageDisplayer.DisplayMessage(MessageDisplayer.PlayAnotherGame);
-            while (v_NotYetAnswered)
-            {
-                if(!firstTimeMessage)
-                {
-                    MessageDisplayer.DisplayMessage(MessageDisplayer.InvalidPlayAnotherGame);
-                }
-                else
-                {
-                    firstTimeMessage = false;
-                }
-
-                yesOrNoInput = Console.ReadLine();
-                if(yesOrNoInput.Equals("yes") || yesOrNoInput.Equals("YES"))
-                {
-                    wontAnotherGame = true;
-                    break;
-                }
-
-                if (yesOrNoInput.Equals("no") || yesOrNoInput.Equals("NO"))
-                {
-                    wontAnotherGame = false;
-                    break;
-                }
-
-            }
-
-            return wontAnotherGame;
         }
 
         internal void AnnounceWinner()

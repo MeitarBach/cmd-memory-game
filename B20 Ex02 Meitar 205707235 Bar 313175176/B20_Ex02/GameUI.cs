@@ -9,21 +9,22 @@ namespace B20_Ex02
 {
     internal class GameUI
     {
-        internal void RunGame()
+        internal void RunGames()
         {
             Player firstPlayer = MainMenu.getHumanPlayer();
             Player secondPlayer = MainMenu.getSecondPlayer();
             bool playAnotherGame;
             do
             {
+                resetScore(firstPlayer, secondPlayer);
                 Board board = MainMenu.getBoard();
-                playAnotherGame = startGame(firstPlayer, secondPlayer, board);
+                playAnotherGame = startSingleGame(firstPlayer, secondPlayer, board);
             }
             while(playAnotherGame);
         }
 
 
-        private bool startGame(Player i_FirstPlayer, Player i_SecondPlayer, Board i_Board)
+        private bool startSingleGame(Player i_FirstPlayer, Player i_SecondPlayer, Board i_Board)
         {
             GameManager gameManager = new GameManager(i_FirstPlayer, i_SecondPlayer, i_Board);
 
@@ -67,7 +68,7 @@ namespace B20_Ex02
 
             if(gameStillActive)
             {
-                gameManager.AnnounceWinner();
+                announceWinner(i_FirstPlayer, i_SecondPlayer);
                 gameStillActive = stillWantToPlay();
             }
 
@@ -101,22 +102,60 @@ namespace B20_Ex02
                     firstTimeMessage = false;
                 }
 
-                yesOrNoInput = Console.ReadLine();
-                if (yesOrNoInput.Equals("yes") || yesOrNoInput.Equals("YES"))
+                // Get player's decision
+                yesOrNoInput = Console.ReadLine().ToLower();
+                if (yesOrNoInput.Equals("yes"))
                 {
                     anotherGame = true;
                     break;
                 }
 
-                if (yesOrNoInput.Equals("no") || yesOrNoInput.Equals("NO"))
+                if (yesOrNoInput.Equals("no"))
                 {
                     anotherGame = false;
                     break;
                 }
-
             }
 
             return anotherGame;
+        }
+
+        private void announceWinner(Player i_FirstPlayer, Player i_SecondPlayer)
+        {
+            string winnerPlayer = "";
+
+            if (i_FirstPlayer.Score < i_SecondPlayer.Score)
+            {
+                winnerPlayer = i_SecondPlayer.PlayerName;
+            }
+
+            if (i_FirstPlayer.Score > i_SecondPlayer.Score)
+            {
+                winnerPlayer = i_FirstPlayer.PlayerName;
+            }
+
+            if (i_FirstPlayer.Score == i_SecondPlayer.Score)
+            {
+                MessageDisplayer.DisplayMessage(MessageDisplayer.ThereIsADraw);
+            }
+            else
+            {
+                string msg = string.Format(
+                    @"{0} {1}
+Final score:  {2} : {3} Points
+              {4} : {5} Points
+             {6}", MessageDisplayer.TheWinnerIs, winnerPlayer,
+                    i_FirstPlayer.PlayerName, i_FirstPlayer.Score,
+                    i_SecondPlayer.PlayerName, i_SecondPlayer.Score,
+                    MessageDisplayer.CongratulationsToWinner);
+                MessageDisplayer.DisplayMessage(msg);
+            }
+        }
+
+        private void resetScore(Player i_FirstPlayer, Player i_SecondPlayer)
+        {
+            i_FirstPlayer.Score = 0;
+            i_SecondPlayer.Score = 0;
         }
     }
 }

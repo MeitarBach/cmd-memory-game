@@ -16,10 +16,10 @@ namespace B20_Ex02
 
             r_Height = i_Height;
             r_Width = i_Width;
-            m_BoardCells = new GameCell[r_Height, r_Width];
             m_RemainingCouples = (r_Height * r_Width) / 2;
             m_UnRevealedCells = new List<GameCell>();
-            createRandomizeBoard();
+            m_BoardCells = new GameCell[r_Height, r_Width];
+            fillBoardRandomly();
         }
 
         internal int Height
@@ -66,7 +66,7 @@ namespace B20_Ex02
             }
         }
 
-        private void createRandomizeBoard()
+        private void fillBoardRandomly()
         {
             int counterOfFilledCells = 0;
 
