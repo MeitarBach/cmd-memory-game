@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace B20_Ex02
 {
@@ -6,13 +7,10 @@ namespace B20_Ex02
     {
         public static void Main()
         {
-            //MainMenu mainMenu = new MainMenu();
-            //mainMenu.CreateGameManager();
-            //Console.ReadLine();
-
             GameUI memoryGame = new GameUI();
             memoryGame.RunGame();
-            Console.ReadLine();
+            MessageDisplayer.DisplayMessage(MessageDisplayer.GoodBye);
+            Thread.Sleep(3000);
         }
     }
 }
