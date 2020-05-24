@@ -4,24 +4,6 @@ namespace B20_Ex02
 {
     internal class MainMenu
     {
-        //internal GameManager CreateGameManager()
-        //{
-        //    Player firstPlayer = getHumanPlayer();
-        //    Player secondPlayer = getSecondPlayer();
-        //    //eGameLevel gameLevel = getGameLevel();
-        //    while(){
-        //           Board board = getBoard();
-
-        //           GameManager gm = GameManager(firstPlayer, secondPlayer, board);
-        //           bool bo = gm.StartGame();
-
-        //    //// TESTING - Remove later
-        //    Console.WriteLine($@"Player #1 is {firstPlayer.PlayerType}");
-        //    Console.WriteLine($@"Player #2 is {secondPlayer.PlayerType}");
-        //    Console.WriteLine(board.Height);
-        //    Console.WriteLine(board.Width);
-        //}
-
         internal static Player getHumanPlayer()
         {
             string playerName;
