@@ -53,7 +53,6 @@ namespace B20_Ex02
           //  if (PlayerType == ePlayerType.Human)
            // {
                 const bool v_IvalidInput = true;
-
                 while (v_IvalidInput)
                 {
                     string inputMoveFromUser = Console.ReadLine();
@@ -76,7 +75,6 @@ namespace B20_Ex02
                 Random random = new Random();
                 int gameCellIndex = random.Next(i_Board.UnRevealedCells.Count);
                 selectedCell = i_Board.UnRevealedCells[gameCellIndex];
-
             }
             */
 
@@ -85,7 +83,6 @@ namespace B20_Ex02
                 selectedCell.IsRevealed = true;
                 i_Board.UnRevealedCells.Remove(selectedCell);
             }
-
 
             return selectedCell;
         }

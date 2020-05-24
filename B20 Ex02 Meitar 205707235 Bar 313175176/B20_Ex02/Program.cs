@@ -10,7 +10,7 @@ namespace B20_Ex02
             //mainMenu.CreateGameManager();
             //Console.ReadLine();
 
-            MemoryGame memoryGame = new MemoryGame();
+            GameUI memoryGame = new GameUI();
             memoryGame.RunGame();
             Console.ReadLine();
         }

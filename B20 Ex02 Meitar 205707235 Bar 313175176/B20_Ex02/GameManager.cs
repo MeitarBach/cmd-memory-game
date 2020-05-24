@@ -16,6 +16,31 @@ namespace B20_Ex02
             m_Board = i_board;
         }
 
+        internal Player ExecuteMove(Player i_CurrentPlayer, GameCell i_FirstCell, GameCell i_SecondCell)
+        {
+            Player nextPlayer = i_CurrentPlayer;
+
+            if (i_FirstCell.Letter == i_SecondCell.Letter)
+            {
+                i_CurrentPlayer.Score++;
+                m_Board.RemainingCouples--;
+            }
+            else
+            {
+                coverCell(i_FirstCell, i_SecondCell);
+                nextPlayer = togglePlayer(i_CurrentPlayer);
+            }
+
+            System.Threading.Thread.Sleep(2000);
+
+            return nextPlayer;
+        }
+
+        internal bool IsGameOver()
+        {
+            return m_Board.RemainingCouples == 0;
+        }
+
         internal bool StartGame()
         {
             bool gameStillActive = true;
@@ -27,7 +52,7 @@ namespace B20_Ex02
                 GameCell cellOne, cellTwo;
 
                 // show board
-                clearAndPainterBoard(boardPainter);
+                boardPainter.ClearAndPaintBoard();
                 MessageDisplayer.DisplayMessage(currentPlayer.PlayerName + MessageDisplayer.PlayerMove);
                 if ((cellOne = currentPlayer.PlayerMove(m_Board)) == null)
                 {
@@ -36,7 +61,7 @@ namespace B20_Ex02
                 }
 
                 // show board after pick one cell
-                clearAndPainterBoard(boardPainter);
+                boardPainter.ClearAndPaintBoard();
                 MessageDisplayer.DisplayMessage(currentPlayer.PlayerName + MessageDisplayer.PlayerMove);
                 if (currentPlayer.PlayerType == ePlayerType.Computer)
                 {
@@ -50,7 +75,7 @@ namespace B20_Ex02
                 }
 
                 // show board after pick second cell
-                clearAndPainterBoard(boardPainter);
+                boardPainter.ClearAndPaintBoard();
 
                 if (cellOne.Letter == cellTwo.Letter)
                 {
@@ -66,8 +91,8 @@ namespace B20_Ex02
 
             if(gameStillActive)
             {
-                whoWon();
-                gameStillActive = stillWontToPlay();
+                AnnounceWinner();
+                gameStillActive = stillWantToPlay();
             }
 
             return gameStillActive;
@@ -103,7 +128,7 @@ namespace B20_Ex02
         //    return isEqual;
         //}
 
-        private bool stillWontToPlay()
+        private bool stillWantToPlay()
         {
             string yesOrNoInput;
             bool wontAnotherGame, firstTimeMessage = true;
@@ -139,7 +164,7 @@ namespace B20_Ex02
             return wontAnotherGame;
         }
 
-        private void whoWon()
+        internal void AnnounceWinner()
         {
             string winnerPlayer = "";
 
@@ -172,12 +197,6 @@ namespace B20_Ex02
             m_Board.UnRevealedCells.Add(i_CellTwo);
             i_CellOne.IsRevealed = false;
             i_CellTwo.IsRevealed = false;
-        }
-
-        private void clearAndPainterBoard(BoardPainter i_BoardPainter)
-        {
-            Ex02.ConsoleUtils.Screen.Clear();
-            i_BoardPainter.PaintBoard();
         }
 
     }
