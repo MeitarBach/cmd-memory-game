@@ -9,11 +9,25 @@ namespace B20_Ex02
         private ePlayerType m_PlayerType;
         private ushort m_Score;
 
-        internal Player(string i_PlayerName, ePlayerType i_PlayerType)
+        //// Computer attributes
+        private readonly eGameLevel r_GameLevel;
+        private Dictionary<char, GameCell> m_RevealedCells;
+        private Stack<GameCell> m_RevealedCouples;
+        private char m_lastGameCellSelected = '0'; // A char which isn't on the board
+
+        internal Player(string i_PlayerName, ePlayerType i_PlayerType, eGameLevel i_GameLevel)
         {
             r_PlayerName = i_PlayerName;
             m_PlayerType = i_PlayerType;
             m_Score = 0;
+
+            //// Computer Player
+            if(i_PlayerType == ePlayerType.Computer)
+            {
+                r_GameLevel = i_GameLevel;
+                m_RevealedCells = new Dictionary<char, GameCell>();
+                m_RevealedCouples = new Stack<GameCell>();
+            }
         }
         
         internal ePlayerType PlayerType
