@@ -72,6 +72,7 @@ namespace B20_Ex02
             return gameCellSelect;
         }
 
+        internal void AnalyzeMove(Board i_Board, GameCell i_GameCell)
         {
             GameCell gameCellMatch = null;
 
