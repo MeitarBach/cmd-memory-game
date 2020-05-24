@@ -67,12 +67,11 @@ namespace B20_Ex02
                 m_lastGameCellSelected = '\0';
             }
 
-            analyzeMove(i_Board, gameCellSelect);
+            AnalyzeMove(i_Board, gameCellSelect);
 
             return gameCellSelect;
         }
 
-        internal void analyzeMove(Board i_Board, GameCell i_GameCell)
         {
             GameCell gameCellMatch = null;
 
@@ -97,14 +96,14 @@ namespace B20_Ex02
             switch (r_GameLevel)
             {
                 case eGameLevel.Easy:
-                    if(randomizeToAdd >= 4) // 50% (Half) of the times algorithm will add
+                    if(randomizeToAdd <= 4) // 50% (Half) of the times algorithm will add
                     {
                         m_RevealedCells.Add(i_GameCell);
                     }
 
                     break;
                 case eGameLevel.Medium:
-                    if (randomizeToAdd >= 7) // 80% the times algorithm will add
+                    if (randomizeToAdd <= 7) // 80% the times algorithm will add
                     {
                         m_RevealedCells.Add(i_GameCell);
                     }
