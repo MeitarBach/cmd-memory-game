@@ -6,17 +6,16 @@ namespace B20_Ex02
     internal class Player
     {
         private readonly string r_PlayerName;
-       // private ePlayerType m_PlayerType;
+        private ePlayerType m_PlayerType;
         private ushort m_Score;
-
 
         internal Player(string i_PlayerName, ePlayerType i_PlayerType)
         {
             r_PlayerName = i_PlayerName;
-        //    m_PlayerType = i_PlayerType;
+            m_PlayerType = i_PlayerType;
             m_Score = 0;
         }
-        /*
+        
         internal ePlayerType PlayerType
         {
             get
@@ -24,7 +23,7 @@ namespace B20_Ex02
                 return m_PlayerType;
             }
         }
-        */
+        
 
         internal string PlayerName
         {
@@ -50,8 +49,8 @@ namespace B20_Ex02
         {
             GameCell selectedCell = null;
 
-          //  if (PlayerType == ePlayerType.Human)
-           // {
+            if (PlayerType == ePlayerType.Human)
+            {
                 const bool v_IvalidInput = true;
                 while (v_IvalidInput)
                 {
@@ -68,15 +67,15 @@ namespace B20_Ex02
                         break;
                     }
                 }
-           // }
-            /*
+            }
+
             else // Computer Move
             {
                 Random random = new Random();
                 int gameCellIndex = random.Next(i_Board.UnRevealedCells.Count);
                 selectedCell = i_Board.UnRevealedCells[gameCellIndex];
             }
-            */
+            
 
             if (selectedCell != null)
             {
