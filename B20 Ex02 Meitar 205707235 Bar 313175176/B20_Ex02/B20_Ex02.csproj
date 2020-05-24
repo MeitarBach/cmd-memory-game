@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Board.cs" />
     <Compile Include="BoardPainter.cs" />
+    <Compile Include="ComputerPlayer.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="GameCell.cs" />
     <Compile Include="GameManager.cs" />
@@ -52,6 +53,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\..\..\..\..\..\..\Temp\Ex02.ConsoleUtils.dll</HintPath>
     </Reference>
+    <Reference Include="System" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
