@@ -160,15 +160,18 @@ namespace B20_Ex02
         private bool coupleRevealedinStack()
         {
             bool existsCouple = false;
-
-            if (m_RevealedCouples.Peek().IsRevealed == false)
-            { 
-                existsCouple = true; 
-            }
-            else // Clear 2 GameCell in the stack if there are cells that Revealed
-            { 
-                m_RevealedCouples.Pop(); 
-                m_RevealedCouples.Pop();
+            while(m_RevealedCouples.Count != 0)
+            {
+                if (m_RevealedCouples.Peek().IsRevealed == false)
+                {
+                    existsCouple = true;
+                    break;
+                }
+                else // Clear 2 GameCell in the stack if there are cells that Revealed 
+                {
+                    m_RevealedCouples.Pop();
+                    m_RevealedCouples.Pop();
+                }
             }
 
             return existsCouple;
