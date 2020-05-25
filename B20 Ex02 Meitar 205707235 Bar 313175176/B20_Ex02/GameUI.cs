@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace B20_Ex02
 {
@@ -58,8 +54,8 @@ namespace B20_Ex02
                 }
             }
 
-            if(gameStillActive) // Finished game without quitting
-            {
+            if(gameStillActive)
+            { // Finished game without quitting
                 announceWinner(i_FirstPlayer, i_SecondPlayer);
                 gameStillActive = stillWantToPlay();
             }
@@ -74,6 +70,7 @@ namespace B20_Ex02
             {
                 MessageDisplayer.DisplayMessage(MessageDisplayer.EnterMove);
             }
+
             io_SelectedCell = i_Player.PlayerMove(i_Board);
             bool wantsToPlay = io_SelectedCell != null;
 
@@ -128,7 +125,6 @@ namespace B20_Ex02
                     anotherGame = yesOrNoInput.Equals("yes");
                     break;
                 }
-                
             }
 
             return anotherGame;
@@ -148,14 +144,13 @@ namespace B20_Ex02
 
         private void announceWinner(Player i_FirstPlayer, Player i_SecondPlayer)
         {
-            string winnerPlayer = "";
+            string winnerPlayer = string.Empty;
 
             if (i_FirstPlayer.Score < i_SecondPlayer.Score)
             {
                 winnerPlayer = i_SecondPlayer.Name;
             }
-
-            if (i_FirstPlayer.Score > i_SecondPlayer.Score)
+            else if (i_FirstPlayer.Score > i_SecondPlayer.Score)
             {
                 winnerPlayer = i_FirstPlayer.Name;
             }
@@ -174,6 +169,7 @@ Final score:  {2} : {3} Points
                     i_FirstPlayer.Name, i_FirstPlayer.Score,
                     i_SecondPlayer.Name, i_SecondPlayer.Score,
                     MessageDisplayer.CongratulationsToWinner);
+
                 MessageDisplayer.DisplayMessage(msg);
             }
         }

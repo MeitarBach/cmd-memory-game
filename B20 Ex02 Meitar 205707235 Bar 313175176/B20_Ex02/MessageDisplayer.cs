@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace B20_Ex02
 {
     internal class MessageDisplayer
     {
-        private const string k_Welcome = "Welcome to Meitar's and Bar's Memory Game!";
+        private const string k_Welcome = "Welcome to Meitar&Bar's Memory Game!";
         private const string k_EnterPlayer = "Please Enter Player Name: (no spaces, max 20 Letters)";
         private const string k_ChooseOpponentType = "Choose your oponnent:  1.Human  2.Computer";
         private const string k_NameTooLarge = "Invalid Name: More than 20 chars";
@@ -19,7 +18,7 @@ namespace B20_Ex02
         private const string k_InvalidSize = "Invalid Size: Width X Height is not even";
         private const string k_Turn = "'s turn:";
         private const string k_EnterMove = "Enter a cell (i.e: B3) or Q to exit";
-        private const string k_InvalidMoveSyntaxError = "Invalid move: Enter a cell in the correct syntax (i.e: B3) or Q to quit";
+        private const string k_InvalidMoveSyntaxError = "Invalid move: Enter a cell in the correct syntax (i.e: B3) or Q to exit";
         private const string k_InvalidMoveOutOfRange = "Invalid move: You entered a cell which is not in the board's range";
         private const string k_InvalidMoveCellRevealed = "Invalid move: You entered a cell which is revealed";
         private const string k_TheWinnerIs = "The winner is: ";
@@ -27,8 +26,7 @@ namespace B20_Ex02
         private const string k_Draw = "It's a draw, maybe next time we'll have a winner :-(";
         private const string k_PlayAnotherGame = "Play another game? insert: YES/NO";
         private const string k_InvalidPlayAnotherGame = "Invalid input: insert: YES/NO";
-        private const string k_GoodBye = "Thanks for playing :-)";
-
+        private const string k_GoodBye = "Thanks for playing, See you later :-)";
 
         internal static string Welcome
         {

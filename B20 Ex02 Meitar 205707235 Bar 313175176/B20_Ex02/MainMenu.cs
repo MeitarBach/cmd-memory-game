@@ -69,20 +69,21 @@ namespace B20_Ex02
             {
                 //// Get board's Width and Height from user
                 MessageDisplayer.DisplayMessage(MessageDisplayer.EnterBoardWidth);
-                if (!int.TryParse(Console.ReadLine(), out boardWidth)) // width entered is not a number
+                if (!int.TryParse(Console.ReadLine(), out boardWidth))
                 {
                     MessageDisplayer.DisplayMessage(MessageDisplayer.NotANumber);
                     continue;
                 }
+
                 MessageDisplayer.DisplayMessage(MessageDisplayer.EnterBoardHeight);
-                if(!int.TryParse(Console.ReadLine(), out boardHeight)) // Height entered is not a number
+                if(!int.TryParse(Console.ReadLine(), out boardHeight))
                 {
                     MessageDisplayer.DisplayMessage(MessageDisplayer.NotANumber);
                     continue;
                 }
 
                 //// Validate Board
-                if (validateBoard(boardWidth,boardHeight))
+                if (validateBoard(boardWidth, boardHeight))
                 {
                     break;
                 }
@@ -105,6 +106,7 @@ namespace B20_Ex02
                 MessageDisplayer.DisplayMessage(MessageDisplayer.NameContainsSpaces);
                 validName = false;
             }
+
             return validName;
         }
         

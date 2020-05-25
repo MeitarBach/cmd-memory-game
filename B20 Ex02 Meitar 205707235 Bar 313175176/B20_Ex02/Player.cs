@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Threading;
 
@@ -53,6 +51,7 @@ namespace B20_Ex02
             {
                 return m_Score;
             }
+
             set
             {
                 m_Score = value;
@@ -81,7 +80,7 @@ namespace B20_Ex02
                     }
                 }
             }
-            else // Computer First Move - Always random
+            else // Computer First Move - Always random, Second move is intelligent
             {
                 selectedCell = ComputerRandomMove(i_Board);
             }
@@ -113,7 +112,7 @@ namespace B20_Ex02
             }
             else
             {
-                Thread.Sleep(500); // wait a second before playing
+                Thread.Sleep(500); // wait a little before playing - for UX
                 selectedCell = ComputerRandomMove(i_Board);
             }
 
