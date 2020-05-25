@@ -13,13 +13,12 @@ namespace B20_Ex02
 
         internal Board(int i_Height, int i_Width)
         {
-
             r_Height = i_Height;
             r_Width = i_Width;
             m_RemainingCouples = (r_Height * r_Width) / 2;
-            m_UnRevealedCells = new List<GameCell>();
-            m_BoardCells = new GameCell[r_Height, r_Width];
-            fillBoardRandomly();
+            m_BoardCells = createBoard();
+            shuffleBoard();
+            m_UnRevealedCells = createUnRevealedCellsList();
         }
 
         internal int Height
@@ -52,6 +51,7 @@ namespace B20_Ex02
             {
                 return m_RemainingCouples;
             }
+
             set
             {
                 m_RemainingCouples = value;
@@ -66,25 +66,36 @@ namespace B20_Ex02
             }
         }
 
-        private void fillBoardRandomly()
+        private GameCell[,] createBoard()
         {
+            GameCell[,] boardCells = new GameCell[r_Height, r_Width];
             int counterOfFilledCells = 0;
 
             for(int i = 0; i < r_Height; i++)
             {
                 for(int j = 0; j < r_Width; j++)
                 {
-                    char temporaryChar = (char) ('A' + (counterOfFilledCells / 2));
-                    m_BoardCells[i, j] = new GameCell(temporaryChar);
-                    m_UnRevealedCells.Add(m_BoardCells[i, j]);
+                    char temporaryChar = (char)('A' + (counterOfFilledCells / 2));
+                    boardCells[i, j] = new GameCell(temporaryChar);
                     counterOfFilledCells++;
                 }
             }
             
-            shuffle();
+            return boardCells;
         }
 
-        private void shuffle()
+        private List<GameCell> createUnRevealedCellsList()
+        {
+            List<GameCell> unRevealedCells = new List<GameCell>();
+            foreach(GameCell gameCell in m_BoardCells)
+            {
+                unRevealedCells.Add(gameCell);
+            }
+
+            return unRevealedCells;
+        }
+
+        private void shuffleBoard()
         {
             int numberOfCells = r_Height * r_Width;
             Random random = new Random();
