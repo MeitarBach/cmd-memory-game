@@ -5,6 +5,7 @@ namespace B20_Ex02
 {
     internal class MessageDisplayer
     {
+        private const string k_Welcome = "Welcome to Meitar's and Bar's Memory Game!";
         private const string k_EnterPlayer = "Please Enter Player Name: (no spaces, max 20 Letters)";
         private const string k_ChooseOpponentType = "Choose your oponnent:  1.Human  2.Computer";
         private const string k_NameTooLarge = "Invalid Name: More than 20 chars";
@@ -16,20 +17,27 @@ namespace B20_Ex02
         private const string k_InvalidWidth = "Invalid Width: Not in range 4-6";
         private const string k_InvalidHeight = "Invalid Height: Not in range 4-6";
         private const string k_InvalidSize = "Invalid Size: Width X Height is not even";
-        private const string k_PlayerMove = "'s turn: (Enter Q to exit)";
-        private const string k_InvalidMoveSyntaxError = "Invalid move: Enter a cell in the correct syntax, i.e: B3";
+        private const string k_Turn = "'s turn:";
+        private const string k_EnterMove = "Enter a cell (i.e: B3) or Q to exit";
+        private const string k_InvalidMoveSyntaxError = "Invalid move: Enter a cell in the correct syntax (i.e: B3) or Q to quit";
         private const string k_InvalidMoveOutOfRange = "Invalid move: You entered a cell which is not in the board's range";
         private const string k_InvalidMoveCellRevealed = "Invalid move: You entered a cell which is revealed";
         private const string k_TheWinnerIs = "The winner is: ";
         private const string k_CongratulationsToWinner = "$$$ Congratulations to the winner $$$";
-        private const string k_ThereIsADraw = "It's a draw, maybe next time :-(";
+        private const string k_Draw = "It's a draw, maybe next time we'll have a winner :-(";
         private const string k_PlayAnotherGame = "Play another game? insert: YES/NO";
         private const string k_InvalidPlayAnotherGame = "Invalid input: insert: YES/NO";
-        private const string k_SelectDifficultyLevel = "Select difficulty level:  1.Easy  2.Medium  3.Hard";
-        private const string k_InvalidDifficultyLevel = "Invalid difficulty level, Please Choose:  1.Easy  2.Medium  3.Hard";
-        private const string k_GoodBye = "Thanks for playing =)";
+        private const string k_GoodBye = "Thanks for playing :-)";
 
 
+        internal static string Welcome
+        {
+            get
+            {
+                return k_Welcome;
+            }
+        }
+        
         internal static string EnterPlayer
         {
             get
@@ -118,11 +126,19 @@ namespace B20_Ex02
             }
         }
 
-        internal static string PlayerMove
+        internal static string Turn
         {
             get
             {
-                return k_PlayerMove;
+                return k_Turn;
+            }
+        }
+        
+        internal static string EnterMove
+        {
+            get
+            {
+                return k_EnterMove;
             }
         }
 
@@ -166,11 +182,11 @@ namespace B20_Ex02
             }
         }
 
-        internal static string ThereIsADraw
+        internal static string Draw
         {
             get
             {
-                return k_ThereIsADraw;
+                return k_Draw;
             }
         }
 
@@ -190,23 +206,6 @@ namespace B20_Ex02
             }
         }
 
-
-        internal static string InvalidDifficultyLevel
-        {
-            get
-            {
-                return k_InvalidDifficultyLevel;
-            }
-        }
-
-        internal static string SelectDifficultyLevel
-        {
-            get
-            {
-                return k_SelectDifficultyLevel;
-            }
-        }
-        
         internal static string GoodBye
         {
             get

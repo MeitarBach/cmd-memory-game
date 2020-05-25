@@ -2,21 +2,22 @@
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace B20_Ex02
 {
     internal class Player
     {
-        private readonly string r_PlayerName;
-        private ePlayerType m_PlayerType;
+        private readonly string r_Name;
+        private ePlayerType m_Type;
         private ushort m_Score;
         private static Dictionary<char, GameCell> s_ComputerMemory = null;
 
 
         internal Player(string i_PlayerName, ePlayerType i_PlayerType)
         {
-            r_PlayerName = i_PlayerName;
-            m_PlayerType = i_PlayerType;
+            r_Name = i_PlayerName;
+            m_Type = i_PlayerType;
             m_Score = 0;
 
             if(i_PlayerType == ePlayerType.Computer)
@@ -25,19 +26,19 @@ namespace B20_Ex02
             }
         }
 
-        internal ePlayerType PlayerType
+        internal ePlayerType Type
         {
             get
             {
-                return m_PlayerType;
+                return m_Type;
             }
         }
 
-        internal string PlayerName
+        internal string Name
         {
             get
             {
-                return r_PlayerName;
+                return r_Name;
             }
         }
 
@@ -53,11 +54,11 @@ namespace B20_Ex02
             }
         }
 
-        internal GameCell PlayerMove(Board i_Board)
+        internal GameCell PlayerMove(Board i_Board) // Returns null if player quits
         {
             GameCell selectedCell = null;
 
-            if (PlayerType == ePlayerType.Human)
+            if (Type == ePlayerType.Human)
             {
                 const bool v_IvalidInput = true;
                 while (v_IvalidInput)
@@ -108,6 +109,7 @@ namespace B20_Ex02
             }
             else
             {
+                Thread.Sleep(500); // wait a second before playing
                 selectedCell = ComputerRandomMove(i_Board);
             }
 
@@ -163,8 +165,7 @@ namespace B20_Ex02
 
         private bool isLeaving(string i_MoveInput)
         {
-            i_MoveInput = i_MoveInput.ToLower();
-            return (i_MoveInput.Length == 1) && (i_MoveInput[0] == 'q');
+            return (i_MoveInput.Length == 1) && (i_MoveInput[0] == 'Q');
         }
     }
 }

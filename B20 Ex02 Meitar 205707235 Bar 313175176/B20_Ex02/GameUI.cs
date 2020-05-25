@@ -11,6 +11,7 @@ namespace B20_Ex02
     {
         internal void RunGames()
         {
+            MessageDisplayer.DisplayMessage(MessageDisplayer.Welcome);
             Player firstPlayer = MainMenu.getHumanPlayer();
             Player secondPlayer = MainMenu.getSecondPlayer();
             bool playAnotherGame;
@@ -18,13 +19,13 @@ namespace B20_Ex02
             {
                 resetGame(firstPlayer, secondPlayer);
                 Board board = MainMenu.getBoard();
-                playAnotherGame = startSingleGame(firstPlayer, secondPlayer, board);
+                playAnotherGame = runSingleGame(firstPlayer, secondPlayer, board);
             }
             while(playAnotherGame);
         }
 
 
-        private bool startSingleGame(Player i_FirstPlayer, Player i_SecondPlayer, Board i_Board)
+        private bool runSingleGame(Player i_FirstPlayer, Player i_SecondPlayer, Board i_Board)
         {
             GameManager gameManager = new GameManager(i_FirstPlayer, i_SecondPlayer, i_Board);
 
@@ -37,36 +38,14 @@ namespace B20_Ex02
                 GameCell firstCell = null;
                 GameCell secondCell = null;
 
-                //// Get First Half of Move
-                boardPainter.ClearAndPaintBoard();
-                gameStillActive = getPlayerHalfMove(currentPlayer, i_Board, ref firstCell);
+                //// Get a move from the player / computer - if player quits returns false
+                gameStillActive = getPlayerMove(currentPlayer, i_Board, boardPainter, ref firstCell, ref secondCell);
                 if(!gameStillActive)
                 {
                     break;
                 }
 
-                //// Show Board Between the moves
-                boardPainter.ClearAndPaintBoard();
-
-
-                //// Make computer sleep between moves
-                if (currentPlayer.PlayerType == ePlayerType.Computer)
-                {
-                    Thread.Sleep(2000);
-                }
-
-                //// Get Second Half of Move
-                if(currentPlayer.PlayerType == ePlayerType.Human)
-                {
-                    gameStillActive = getPlayerHalfMove(currentPlayer, i_Board, ref secondCell);
-                }
-                else
-                {
-                    secondCell = currentPlayer.ComputerAiMove(i_Board, firstCell);
-                }
-
-                //// Remember uncovered cells with 50% probability
-                if (i_SecondPlayer.PlayerType == ePlayerType.Computer)
+                if (i_SecondPlayer.Type == ePlayerType.Computer)
                 {
                     Player.ComputerRememberCell(firstCell);
                     Player.ComputerRememberCell(secondCell);
@@ -81,7 +60,7 @@ namespace B20_Ex02
                 }
             }
 
-            if(gameStillActive)
+            if(gameStillActive) // Finished game without quitting
             {
                 announceWinner(i_FirstPlayer, i_SecondPlayer);
                 gameStillActive = stillWantToPlay();
@@ -92,47 +71,81 @@ namespace B20_Ex02
 
         private bool getPlayerHalfMove(Player i_Player, Board i_Board, ref GameCell io_SelectedCell)
         {
-            MessageDisplayer.DisplayMessage(i_Player.PlayerName + MessageDisplayer.PlayerMove);
+            MessageDisplayer.DisplayMessage(i_Player.Name + MessageDisplayer.Turn);
+            if(i_Player.Type == ePlayerType.Human)
+            {
+                MessageDisplayer.DisplayMessage(MessageDisplayer.EnterMove);
+            }
             io_SelectedCell = i_Player.PlayerMove(i_Board);
             bool wantsToPlay = io_SelectedCell != null;
 
             return wantsToPlay;
         }
 
+        private bool getPlayerMove(Player i_Player, Board i_Board, BoardPainter i_BoardPainter,
+                                   ref GameCell io_FirstCell, ref GameCell io_SecondCell)
+        {
+            bool isHuman = i_Player.Type == ePlayerType.Human;
+
+            //// Get First Half of Move - Human + Computer
+            i_BoardPainter.ClearAndPaintBoard();
+            bool didNotQuit = getPlayerHalfMove(i_Player, i_Board, ref io_FirstCell);
+            if (didNotQuit)
+            {
+                //// Show Board Between the moves
+                i_BoardPainter.ClearAndPaintBoard();
+
+                //// Make computer sleep between moves
+                if (!isHuman)
+                {
+                    Thread.Sleep(2000);
+                }
+
+                //// Get Second Half of Move
+                if (isHuman)
+                {
+                    didNotQuit = getPlayerHalfMove(i_Player, i_Board, ref io_SecondCell);
+                }
+                else
+                {
+                    io_SecondCell = i_Player.ComputerAiMove(i_Board, io_FirstCell);
+                }
+            }
+
+            return didNotQuit;
+        }
+
         private bool stillWantToPlay()
         {
-            string yesOrNoInput;
-            bool anotherGame, firstTimeMessage = true;
+            bool anotherGame;
             const bool v_NotYetAnswered = true;
 
             MessageDisplayer.DisplayMessage(MessageDisplayer.PlayAnotherGame);
             while (v_NotYetAnswered)
             {
-                if (!firstTimeMessage)
-                {
-                    MessageDisplayer.DisplayMessage(MessageDisplayer.InvalidPlayAnotherGame);
-                }
-                else
-                {
-                    firstTimeMessage = false;
-                }
-
                 // Get player's decision
-                yesOrNoInput = Console.ReadLine().ToLower();
-                if (yesOrNoInput.Equals("yes"))
+                string yesOrNoInput = Console.ReadLine().ToLower();
+                if(validateYesNo(yesOrNoInput))
                 {
-                    anotherGame = true;
+                    anotherGame = yesOrNoInput.Equals("yes");
                     break;
                 }
-
-                if (yesOrNoInput.Equals("no"))
-                {
-                    anotherGame = false;
-                    break;
-                }
+                
             }
 
             return anotherGame;
+        }
+
+        private static bool validateYesNo(string i_Decision)
+        {
+            i_Decision = i_Decision.ToLower();
+            bool validChoice = i_Decision.Equals("yes") || i_Decision.Equals("no");
+            if (!validChoice)
+            {
+                MessageDisplayer.DisplayMessage(MessageDisplayer.InvalidPlayAnotherGame);
+            }
+
+            return validChoice;
         }
 
         private void announceWinner(Player i_FirstPlayer, Player i_SecondPlayer)
@@ -141,17 +154,17 @@ namespace B20_Ex02
 
             if (i_FirstPlayer.Score < i_SecondPlayer.Score)
             {
-                winnerPlayer = i_SecondPlayer.PlayerName;
+                winnerPlayer = i_SecondPlayer.Name;
             }
 
             if (i_FirstPlayer.Score > i_SecondPlayer.Score)
             {
-                winnerPlayer = i_FirstPlayer.PlayerName;
+                winnerPlayer = i_FirstPlayer.Name;
             }
 
             if (i_FirstPlayer.Score == i_SecondPlayer.Score)
             {
-                MessageDisplayer.DisplayMessage(MessageDisplayer.ThereIsADraw);
+                MessageDisplayer.DisplayMessage(MessageDisplayer.Draw);
             }
             else
             {
@@ -159,9 +172,9 @@ namespace B20_Ex02
                     @"{0} {1}
 Final score:  {2} : {3} Points
               {4} : {5} Points
-             {6}", MessageDisplayer.TheWinnerIs, winnerPlayer,
-                    i_FirstPlayer.PlayerName, i_FirstPlayer.Score,
-                    i_SecondPlayer.PlayerName, i_SecondPlayer.Score,
+           {6}", MessageDisplayer.TheWinnerIs, winnerPlayer,
+                    i_FirstPlayer.Name, i_FirstPlayer.Score,
+                    i_SecondPlayer.Name, i_SecondPlayer.Score,
                     MessageDisplayer.CongratulationsToWinner);
                 MessageDisplayer.DisplayMessage(msg);
             }
@@ -171,7 +184,7 @@ Final score:  {2} : {3} Points
         {
             i_FirstPlayer.Score = 0;
             i_SecondPlayer.Score = 0;
-            if(i_SecondPlayer.PlayerType == ePlayerType.Computer)
+            if(i_SecondPlayer.Type == ePlayerType.Computer)
             {
                 Player.ResetComputerMemory();
             }

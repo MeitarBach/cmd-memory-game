@@ -59,6 +59,5 @@ namespace B20_Ex02
             i_CellOne.IsRevealed = false;
             i_CellTwo.IsRevealed = false;
         }
-
     }
 }
