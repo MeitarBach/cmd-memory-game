@@ -16,7 +16,7 @@ namespace B20_Ex02
             bool playAnotherGame;
             do
             {
-                resetScore(firstPlayer, secondPlayer);
+                resetGame(firstPlayer, secondPlayer);
                 Board board = MainMenu.getBoard();
                 playAnotherGame = startSingleGame(firstPlayer, secondPlayer, board);
             }
@@ -56,7 +56,22 @@ namespace B20_Ex02
                 }
 
                 //// Get Second Half of Move
-                gameStillActive = getPlayerHalfMove(currentPlayer, i_Board, ref secondCell);
+                if(currentPlayer.PlayerType == ePlayerType.Human)
+                {
+                    gameStillActive = getPlayerHalfMove(currentPlayer, i_Board, ref secondCell);
+                }
+                else
+                {
+                    secondCell = currentPlayer.ComputerAiMove(i_Board, firstCell);
+                }
+
+                //// Remember uncovered cells with 50% probability
+                if (i_SecondPlayer.PlayerType == ePlayerType.Computer)
+                {
+                    Player.ComputerRememberCell(firstCell);
+                    Player.ComputerRememberCell(secondCell);
+                }
+
                 boardPainter.ClearAndPaintBoard();
 
                 currentPlayer = gameManager.ExecuteMove(currentPlayer, firstCell, secondCell);
@@ -152,10 +167,14 @@ Final score:  {2} : {3} Points
             }
         }
 
-        private void resetScore(Player i_FirstPlayer, Player i_SecondPlayer)
+        private void resetGame(Player i_FirstPlayer, Player i_SecondPlayer)
         {
             i_FirstPlayer.Score = 0;
             i_SecondPlayer.Score = 0;
+            if(i_SecondPlayer.PlayerType == ePlayerType.Computer)
+            {
+                Player.ResetComputerMemory();
+            }
         }
     }
 }

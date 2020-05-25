@@ -8,7 +8,7 @@ namespace B20_Ex02
         public static void Main()
         {
             GameUI memoryGame = new GameUI();
-            memoryGame.RunGame();
+            memoryGame.RunGames();
             MessageDisplayer.DisplayMessage(MessageDisplayer.GoodBye);
             Thread.Sleep(2500);
         }

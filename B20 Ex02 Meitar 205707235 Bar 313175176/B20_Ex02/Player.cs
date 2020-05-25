@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace B20_Ex02
@@ -8,6 +10,7 @@ namespace B20_Ex02
         private readonly string r_PlayerName;
         private ePlayerType m_PlayerType;
         private ushort m_Score;
+        private static Dictionary<char, GameCell> s_ComputerMemory = null;
 
 
         internal Player(string i_PlayerName, ePlayerType i_PlayerType)
@@ -15,6 +18,11 @@ namespace B20_Ex02
             r_PlayerName = i_PlayerName;
             m_PlayerType = i_PlayerType;
             m_Score = 0;
+
+            if(i_PlayerType == ePlayerType.Computer)
+            {
+                s_ComputerMemory = new Dictionary<char, GameCell>();
+            }
         }
 
         internal ePlayerType PlayerType
@@ -70,18 +78,56 @@ namespace B20_Ex02
             }
             else // Computer Move
             {
-                Random random = new Random();
-                int gameCellIndex = random.Next(i_Board.UnRevealedCells.Count);
-                selectedCell = i_Board.UnRevealedCells[gameCellIndex];
+                selectedCell = ComputerRandomMove(i_Board);
             }
 
-            if (selectedCell != null)
+            if (selectedCell != null) // User Didn't Quit
             {
                 selectedCell.IsRevealed = true;
                 i_Board.UnRevealedCells.Remove(selectedCell);
             }
 
             return selectedCell;
+        }
+
+        internal GameCell ComputerRandomMove(Board i_Board)
+        {
+            Random random = new Random();
+            int gameCellIndex = random.Next(i_Board.UnRevealedCells.Count);
+            return i_Board.UnRevealedCells[gameCellIndex];
+        }
+
+        internal GameCell ComputerAiMove(Board i_Board, GameCell i_FirstRevealedCell)
+        {
+            GameCell selectedCell;
+
+            if(s_ComputerMemory.TryGetValue(i_FirstRevealedCell.Letter, out selectedCell)) // Letter found in memory
+            {
+                //// Make sure it's not the same cell
+                selectedCell = selectedCell != i_FirstRevealedCell ? selectedCell : ComputerRandomMove(i_Board);
+            }
+            else
+            {
+                selectedCell = ComputerRandomMove(i_Board);
+            }
+
+            selectedCell.IsRevealed = true;
+            i_Board.UnRevealedCells.Remove(selectedCell);
+
+            return selectedCell;
+        }
+
+        internal static void ComputerRememberCell(GameCell i_GameCell) // computer remembers up to 1/2 of the board
+        {
+            if(!s_ComputerMemory.ContainsKey(i_GameCell.Letter))
+            {
+                s_ComputerMemory.Add(i_GameCell.Letter, i_GameCell);
+            }
+        }
+
+        internal static void ResetComputerMemory()
+        {
+            s_ComputerMemory = new Dictionary<char, GameCell>();
         }
 
         private bool validateMove(string i_MoveInput, Board i_Board)
@@ -117,7 +163,8 @@ namespace B20_Ex02
 
         private bool isLeaving(string i_MoveInput)
         {
-            return (i_MoveInput.Length == 1) && (i_MoveInput[0] == 'Q');
+            i_MoveInput = i_MoveInput.ToLower();
+            return (i_MoveInput.Length == 1) && (i_MoveInput[0] == 'q');
         }
     }
 }

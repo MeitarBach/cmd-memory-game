@@ -52,33 +52,6 @@ namespace B20_Ex02
             return newPlayer;
         }
 
-        internal void AnnounceWinner()
-        {
-            string winnerPlayer = "";
-
-            if(m_FirstPlayer.Score < m_SecondPlayer.Score)
-            {
-                winnerPlayer = m_SecondPlayer.PlayerName;
-            }
-
-            if(m_FirstPlayer.Score > m_SecondPlayer.Score)
-            {
-                winnerPlayer = m_FirstPlayer.PlayerName;
-            }
-
-            if(m_FirstPlayer.Score == m_SecondPlayer.Score)
-            {
-                MessageDisplayer.DisplayMessage(MessageDisplayer.ThereIsADraw);
-            }
-            else
-            {
-                string msg = string.Format(
- @"{0} {1}
-             {2}", MessageDisplayer.TheWinnerIs, winnerPlayer, MessageDisplayer.CongratulationsToWinner);
-                MessageDisplayer.DisplayMessage(msg);
-            }
-        }
-
         private void coverCell(GameCell i_CellOne, GameCell i_CellTwo)
         {
             m_Board.UnRevealedCells.Add(i_CellOne);
