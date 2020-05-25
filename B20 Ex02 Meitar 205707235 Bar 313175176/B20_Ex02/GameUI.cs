@@ -24,11 +24,9 @@ namespace B20_Ex02
             while(playAnotherGame);
         }
 
-
         private bool runSingleGame(Player i_FirstPlayer, Player i_SecondPlayer, Board i_Board)
         {
             GameManager gameManager = new GameManager(i_FirstPlayer, i_SecondPlayer, i_Board);
-
             bool gameStillActive = true;
             Player currentPlayer = i_FirstPlayer;
             BoardPainter boardPainter = new BoardPainter(i_Board);
@@ -47,8 +45,8 @@ namespace B20_Ex02
 
                 if (i_SecondPlayer.Type == ePlayerType.Computer)
                 {
-                    Player.ComputerRememberCell(firstCell);
-                    Player.ComputerRememberCell(secondCell);
+                    i_SecondPlayer.ComputerRememberCell(firstCell);
+                    i_SecondPlayer.ComputerRememberCell(secondCell);
                 }
 
                 boardPainter.ClearAndPaintBoard();
@@ -186,7 +184,7 @@ Final score:  {2} : {3} Points
             i_SecondPlayer.Score = 0;
             if(i_SecondPlayer.Type == ePlayerType.Computer)
             {
-                Player.ResetComputerMemory();
+                i_SecondPlayer.ResetComputerMemory();
             }
         }
     }

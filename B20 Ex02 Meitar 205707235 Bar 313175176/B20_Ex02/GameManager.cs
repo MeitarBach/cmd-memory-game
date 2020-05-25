@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text;
+﻿using System.Threading;
 
 namespace B20_Ex02
 {
@@ -9,11 +8,11 @@ namespace B20_Ex02
         private Player m_SecondPlayer;
         private Board m_Board;
 
-        internal GameManager(Player i_FirstPlayer, Player i_SecondPlayer, Board i_board)
+        internal GameManager(Player i_FirstPlayer, Player i_SecondPlayer, Board i_Board)
         {
             m_FirstPlayer = i_FirstPlayer;
             m_SecondPlayer = i_SecondPlayer;
-            m_Board = i_board;
+            m_Board = i_Board;
         }
 
         internal Player ExecuteMove(Player i_CurrentPlayer, GameCell i_FirstCell, GameCell i_SecondCell)
@@ -27,11 +26,11 @@ namespace B20_Ex02
             }
             else
             {
-                coverCell(i_FirstCell, i_SecondCell);
+                coverCells(i_FirstCell, i_SecondCell);
                 nextPlayer = togglePlayer(i_CurrentPlayer);
             }
 
-            System.Threading.Thread.Sleep(2000);
+            Thread.Sleep(2000);
 
             return nextPlayer;
         }
@@ -52,7 +51,7 @@ namespace B20_Ex02
             return newPlayer;
         }
 
-        private void coverCell(GameCell i_CellOne, GameCell i_CellTwo)
+        private void coverCells(GameCell i_CellOne, GameCell i_CellTwo)
         {
             m_Board.UnRevealedCells.Add(i_CellOne);
             m_Board.UnRevealedCells.Add(i_CellTwo);

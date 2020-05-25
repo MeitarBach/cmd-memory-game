@@ -6,23 +6,28 @@ using System.Threading;
 
 namespace B20_Ex02
 {
+    internal enum ePlayerType
+    {
+        Human = 1,
+        Computer = 2
+    }
+
     internal class Player
     {
         private readonly string r_Name;
-        private ePlayerType m_Type;
+        private readonly ePlayerType r_Type;
         private ushort m_Score;
-        private static Dictionary<char, GameCell> s_ComputerMemory = null;
-
+        private Dictionary<char, GameCell> m_ComputerMemory = null;
 
         internal Player(string i_PlayerName, ePlayerType i_PlayerType)
         {
             r_Name = i_PlayerName;
-            m_Type = i_PlayerType;
+            r_Type = i_PlayerType;
             m_Score = 0;
 
             if(i_PlayerType == ePlayerType.Computer)
             {
-                s_ComputerMemory = new Dictionary<char, GameCell>();
+                m_ComputerMemory = new Dictionary<char, GameCell>();
             }
         }
 
@@ -30,7 +35,7 @@ namespace B20_Ex02
         {
             get
             {
-                return m_Type;
+                return r_Type;
             }
         }
 
@@ -64,7 +69,6 @@ namespace B20_Ex02
                 while (v_IvalidInput)
                 {
                     string inputMoveFromUser = Console.ReadLine();
-
                     if (isLeaving(inputMoveFromUser))
                     {
                         break;
@@ -77,7 +81,7 @@ namespace B20_Ex02
                     }
                 }
             }
-            else // Computer Move
+            else // Computer First Move - Always random
             {
                 selectedCell = ComputerRandomMove(i_Board);
             }
@@ -98,11 +102,11 @@ namespace B20_Ex02
             return i_Board.UnRevealedCells[gameCellIndex];
         }
 
-        internal GameCell ComputerAiMove(Board i_Board, GameCell i_FirstRevealedCell)
+        internal GameCell ComputerAiMove(Board i_Board, GameCell i_FirstRevealedCell) // Second half of move is intelligent
         {
             GameCell selectedCell;
 
-            if(s_ComputerMemory.TryGetValue(i_FirstRevealedCell.Letter, out selectedCell)) // Letter found in memory
+            if(m_ComputerMemory.TryGetValue(i_FirstRevealedCell.Letter, out selectedCell)) // Letter found in memory
             {
                 //// Make sure it's not the same cell
                 selectedCell = selectedCell != i_FirstRevealedCell ? selectedCell : ComputerRandomMove(i_Board);
@@ -119,17 +123,17 @@ namespace B20_Ex02
             return selectedCell;
         }
 
-        internal static void ComputerRememberCell(GameCell i_GameCell) // computer remembers up to 1/2 of the board
+        internal void ComputerRememberCell(GameCell i_GameCell) // computer remembers up to 1/2 of the board
         {
-            if(!s_ComputerMemory.ContainsKey(i_GameCell.Letter))
+            if(!m_ComputerMemory.ContainsKey(i_GameCell.Letter))
             {
-                s_ComputerMemory.Add(i_GameCell.Letter, i_GameCell);
+                m_ComputerMemory.Add(i_GameCell.Letter, i_GameCell);
             }
         }
 
-        internal static void ResetComputerMemory()
+        internal void ResetComputerMemory()
         {
-            s_ComputerMemory = new Dictionary<char, GameCell>();
+            m_ComputerMemory = new Dictionary<char, GameCell>();
         }
 
         private bool validateMove(string i_MoveInput, Board i_Board)

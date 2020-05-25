@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Text;
+using Ex02.ConsoleUtils;
 
 namespace B20_Ex02
 {
-    class BoardPainter
+    internal class BoardPainter
     {
         private Board m_Board;
 
@@ -14,7 +15,7 @@ namespace B20_Ex02
 
         internal void ClearAndPaintBoard()
         {
-            Ex02.ConsoleUtils.Screen.Clear();
+            Screen.Clear();
             StringBuilder boardPainting = new StringBuilder();
 
             //// Create a row seperator
@@ -29,16 +30,17 @@ namespace B20_Ex02
                 firstLine.Append("   " + columnLetter);
                 columnLetter++;
             }
+
             boardPainting.Append(firstLine + Environment.NewLine);
 
             //// Draw all lines based on the board's Game Cells
             for(int i = 0; i < m_Board.Height; i++)
             {
                 boardPainting.Append(rowSeperator + Environment.NewLine); // row seperator
-                boardPainting.Append((i+1) + " "); // row number
+                boardPainting.Append((i + 1) + " "); // row number
                 for(int j = 0; j < m_Board.Width; j++)
                 {
-                    boardPainting.Append("|" + m_Board.BoardCells[i,j]);
+                    boardPainting.Append("|" + m_Board.BoardCells[i, j]);
                 }
 
                 boardPainting.Append("|" + Environment.NewLine);
